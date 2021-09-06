@@ -156,7 +156,7 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src=" {{ asset('/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Cross</span>
+      <span class="brand-text font-weight-light">Tucan Crossfit</span>
     </a>
 
     <!-- Sidebar -->
@@ -230,7 +230,7 @@
             </ul>
           </li>
           <li class="nav-header">GESTION INTERNA</li>
-          <li class="nav-item {{ Route::is('cliente.create') || Route::is('cliente.index') ? 'menu-open' : '' }}">
+          <li class="nav-item {{ Route::is('cliente.create') || Route::is('cliente.index') || Route::is('cobro.index') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -241,19 +241,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('cliente.create') }}" class="nav-link">
+                <a href="{{ route('cliente.create') }}" class="nav-link {{ Route::is('cliente.create') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Crear Cliente</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('cliente.index') }}" class="nav-link">
+                <a href="{{ route('cliente.index') }}" class="nav-link {{ Route::is('cliente.index') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lista de clientes</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('cobro.index') }}" class="nav-link">
+                <a href="{{ route('cobro.index') }}" class="nav-link {{ Route::is('cobro.index') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Cobros de clientes</p>
                 </a>
