@@ -16,7 +16,13 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputCedula1">Cedula</label>
-                        <input type="text" name="cedula" value="{{ old('cedula') }}" class="form-control" id="exampleInputCedula1" required>
+                        <input type="text" name="cedula" value="{{ old('cedula') }}" id="cedula" onkeypress="return soloNumeros(event)" class="form-control" id="exampleInputCedula1" required>
+                        <div class="invalid-feedback">
+                            Cedula invalida.
+                        </div>
+                        <div class="valid-feedback">
+                            Cedula valida.
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputNombres1">Nombres</label>
@@ -36,11 +42,17 @@
                     </div>
                     <div class="form-group">
                         <label>Telefono</label>
-                        <input type="text" name="telefono" value="{{ old('telefono') }}" class="form-control"  required/>
+                        <input type="text" name="telefono" id="telefono" value="{{ old('telefono') }}" class="form-control" onkeypress="return soloNumeros(event)" required/>
+                        <div class="invalid-feedback">
+                            Debe de ser un numero de 7 digítos
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Celular</label>
-                        <input type="text" name="celular" value="{{ old('celular') }}" class="form-control"  required/>
+                        <input type="text" name="celular" id="celular" value="{{ old('celular') }}" onkeypress="return soloNumeros(event)" class="form-control"  required/>
+                        <div class="invalid-feedback">
+                            Debe de ser un numero de 10 digítos y debe empezar a 0
+                        </div>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -51,4 +63,47 @@
         </div>
         <!-- /.card -->
     </div>
+    <script>
+        document.getElementById('telefono').addEventListener('change', () => {
+            const input = document.getElementById('telefono')
+            const resolve = validarTelefono(input)
+            const classBad = ['is-invalid']
+
+            if(!resolve){
+                input.value = ''
+                classBad.forEach((cls) => input.classList.add(cls))
+            }else{
+                classBad.forEach((cls) => input.classList.remove(cls))
+            }
+        })
+
+        document.getElementById('celular').addEventListener('change', () => {
+            const input = document.getElementById('celular')
+            const resolve = validarCelular(input)
+            const classBad = ['is-invalid']
+            if(!resolve){
+                input.value = ''
+                classBad.forEach((cls) => input.classList.add(cls))
+            }else{
+                classBad.forEach((cls) => input.classList.remove(cls))
+            }
+        })
+        
+        document.getElementById('cedula').addEventListener('change', () => {
+            const input = document.getElementById('cedula')
+            const resolve = verificarCedula(input)
+            const classBad = ['is-invalid']
+            const classOk = ['is-valid']
+
+            if(!resolve){
+                input.value = ''
+                classBad.forEach((cls) => input.classList.add(cls))
+                classOk.forEach((cls) => input.classList.remove(cls))
+            }else{
+                classBad.forEach((cls) => input.classList.remove(cls))
+                classOk.forEach((cls) => input.classList.add(cls))
+            }
+        })
+        
+    </script>
 </x-app-layout>

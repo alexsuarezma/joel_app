@@ -16,7 +16,13 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputCedula1">Cedula</label>
-                        <input type="text" name="cedula" value="{{ old('cedula') }}" class="form-control" id="exampleInputCedula1" required>
+                        <input type="text" name="cedula" id="cedula" value="{{ old('cedula') }}" onkeypress="return soloNumeros(event)" class="form-control" id="exampleInputCedula1" required>
+                        <div class="invalid-feedback">
+                            Cedula invalida.
+                        </div>
+                        <div class="valid-feedback">
+                            Cedula valida.
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputNombres1">Nombres</label>
@@ -58,7 +64,23 @@
         </div>
         <!-- /.card -->
     </div>
+    <script>
+        document.getElementById('cedula').addEventListener('change', () => {
+            const input = document.getElementById('cedula')
+            const resolve = verificarCedula(input)
+            const classBad = ['is-invalid']
+            const classOk = ['is-valid']
 
+            if(!resolve){
+                input.value = ''
+                classBad.forEach((cls) => input.classList.add(cls))
+                classOk.forEach((cls) => input.classList.remove(cls))
+            }else{
+                classBad.forEach((cls) => input.classList.remove(cls))
+                classOk.forEach((cls) => input.classList.add(cls))
+            }
+        })
+    </script>
     {{--<!-- jQuery -->
     <script src="{{ asset('/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->

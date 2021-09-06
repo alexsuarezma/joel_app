@@ -19,7 +19,13 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputCedula1">Cedula</label>
-                        <input type="text" name="cedula" value="{{ $empleado->cedula }}" class="form-control" id="exampleInputCedula1" required>
+                        <input type="text" name="cedula" id="cedula" value="{{ $empleado->cedula }}" onkeypress="return soloNumeros(event)" class="form-control" id="exampleInputCedula1" required>
+                        <div class="invalid-feedback">
+                            Cedula invalida.
+                        </div>
+                        <div class="valid-feedback">
+                            Cedula valida.
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputNombres1">Nombres</label>
@@ -62,6 +68,23 @@
         </div>
         <!-- /.card -->
     </div>
+    <script>
+        document.getElementById('cedula').addEventListener('change', () => {
+            const input = document.getElementById('cedula')
+            const resolve = verificarCedula(input)
+            const classBad = ['is-invalid']
+            const classOk = ['is-valid']
+
+            if(!resolve){
+                input.value = ''
+                classBad.forEach((cls) => input.classList.add(cls))
+                classOk.forEach((cls) => input.classList.remove(cls))
+            }else{
+                classBad.forEach((cls) => input.classList.remove(cls))
+                classOk.forEach((cls) => input.classList.add(cls))
+            }
+        })
+    </script>
     @else
         <x-error404></x-error404>
     @endif
