@@ -7,6 +7,11 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Fortify\Fortify;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+
 class JetstreamServiceProvider extends ServiceProvider
 {
     /**
@@ -31,7 +36,18 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::deleteUsersUsing(DeleteUser::class);
 
         Fortify::registerView(function(){
-            return view('auth.register');
+            return view('auth.register',[
+                'roles' => Role::all()
+            ]);
+        });
+
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('username', $request->username)->where('active', 1)->first();
+
+            if ($user &&
+                Hash::check($request->password, $user->password)) {
+                return $user;
+            }
         });
 
     }

@@ -62,8 +62,12 @@
   <link rel="stylesheet" href=" {{ asset('/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href=" {{ asset('/dist/css/adminlte.min.css') }}">
+  
+  @livewireStyles
 </head>
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+@livewireScripts
+
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -78,12 +82,12 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="/" class="nav-link">Inicio</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contacto</a>
-      </li>
+      </li> -->
     </ul>
 
     <!-- Right navbar links -->
@@ -135,9 +139,12 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fas fa-user-alt"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
+          <!-- <span class="badge badge-danger navbar-badge">3</span> -->
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="{{ route('profile.show') }}" class="dropdown-item d-flex justify-content-center">
+              Configuración de la cuenta
+          </a>
           <div class="dropdown-divider"></div>
           <form method="POST" action="{{ route('logout') }}">
             @csrf
@@ -156,7 +163,7 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src=" {{ asset('/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Tucan Crossfit</span>
+      <span class="brand-text font-weight-light">Joel APP</span>
     </a>
 
     <!-- Sidebar -->
@@ -205,31 +212,58 @@
               </li>
             </ul>
           </li>
-          <li class="nav-header">SEGURIDAD</li>
-          <li class="nav-item {{ Route::is('user.create') || Route::is('user.index') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Usuarios
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('user.create') }}" class="nav-link {{ Route::is('user.create') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Usuario</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('user.index') }}" class="nav-link {{ Route::is('user.index') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lista de Usuarios</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-header">GESTION INTERNA</li>
+          @if(\Auth::user()->can('usuario.create') || \Auth::user()->can('usuario.index') || \Auth::user()->can('usuario.editar.avanzado') || \Auth::user()->can('usuario.desactivar.activar'))
+            <li class="nav-header">SEGURIDAD</li>
+            <li class="nav-item {{ Route::is('user.create') || Route::is('user.index') || Route::is('user.update') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-chart-pie"></i>
+                <p>
+                  Usuarios
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                @can('usuario.crear')
+                  <li class="nav-item">
+                    <a href="{{ route('user.create') }}" class="nav-link {{ Route::is('user.create') ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Crear Usuario</p>
+                    </a>
+                  </li>
+                @endcan
+                @can('usuario.index')
+                  <li class="nav-item">
+                    <a href="{{ route('user.index') }}" class="nav-link {{ Route::is('user.index') || Route::is('user.update') ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Lista de Usuarios</p>
+                    </a>
+                  </li>
+                @endcan
+              </ul>
+            </li>
+          @endif
+          @if(\Auth::user()->can('rol.crear') || \Auth::user()->can('rol.index') || \Auth::user()->can('rol.editar.avanzado') || \Auth::user()->can('rol.asignar') || \Auth::user()->can('rol.revocar'))
+            <li class="nav-item {{ Route::is('role.index') | Route::is('role.create.get') | Route::is('role.update.get') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-chart-pie"></i>
+                <p>
+                  Roles
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                @can('rol.index')
+                  <li class="nav-item">
+                    <a href="{{ route('role.index') }}" class="nav-link {{ Route::is('role.index') ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Lista de Roles</p>
+                    </a>
+                  </li>
+                @endcan
+              </ul>
+            </li>
+          @endif
+          {{-- <li class="nav-header">GESTION INTERNA</li>
           <li class="nav-item {{ Route::is('cliente.create') || Route::is('cliente.index') || Route::is('cobro.index') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -311,7 +345,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -338,7 +372,7 @@
 
       <!-- Main Footer -->
       <footer class="main-footer">
-        <strong>Copyright &copy;  Milton Muñoz.</strong>
+        <strong>Copyright &copy;  Joel Garcia.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
           <b>Version</b> 3.1.0
@@ -346,7 +380,6 @@
       </footer>
     </div>
     <!-- ./wrapper -->
-
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
     <script src="{{ asset('/plugins/jquery/jquery.min.js') }}"></script>

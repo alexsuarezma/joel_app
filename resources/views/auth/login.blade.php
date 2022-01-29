@@ -51,18 +51,18 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-        <a href="/" class="h1"><b>Admin</b>LTE</a>
+        <a href="/" class="h1"><b>Joel</b>APP</a>
         </div>
+        <x-toast-message></x-toast-message>
         <div class="card-body">
         <p class="login-box-msg">Sign in to start your session</p>
-
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email" name="email" value="{{old('email')}}" required>
+            <input type="text" class="form-control" placeholder="Nombre de usuario" name="username" value="{{old('username')}}" required>
             <div class="input-group-append">
                 <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+                    <i class="fas fa-user"></i>
                 </div>
             </div>
             </div>
