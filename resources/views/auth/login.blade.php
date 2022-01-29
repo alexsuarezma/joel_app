@@ -94,9 +94,9 @@
                 </a>
             </p>
         @endif
-        <p class="mb-0">
+        <!-- <p class="mb-0">
             <a href="register.html" class="text-center">Register a new membership</a>
-        </p>
+        </p> -->
         </div>
         <!-- /.card-body -->
     </div>
