@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\TipoGastoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +57,39 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::delete('/role/delete/', [RoleController::class, 'delete'])->name('role.delete')->middleware('permission:rol.eliminar');
 });
 
+Route::middleware('auth')->prefix('cliente')->group(function () {
+    
+    Route::get('/register', [ClienteController::class, 'register'])->name('cliente.create')->middleware('permission:cliente.crear');
+    Route::get('/update/{id}', [ClienteController::class, 'updateView'])->name('cliente.update')->middleware('permission:cliente.editar.avanzado');
+    Route::get('/list', [ClienteController::class, 'index'])->name('cliente.index')->middleware('permission:cliente.index');
+    Route::post('/register', [ClienteController::class, 'create'])->name('cliente.create.post')->middleware('permission:cliente.crear');
+    Route::put('/update', [ClienteController::class, 'update'])->name('cliente.update.put')->middleware('permission:cliente.editar.avanzado');
+});
+
+Route::middleware('auth')->prefix('tipo/gasto')->group(function () {
+    
+    Route::get('/register', [TipoGastoController::class, 'register'])->name('tipo.gasto.create')->middleware('permission:tipo.gasto.crear');
+    Route::get('/update/{id}', [TipoGastoController::class, 'updateView'])->name('tipo.gasto.update')->middleware('permission:tipo.gasto.editar.avanzado');
+    Route::get('/list', [TipoGastoController::class, 'index'])->name('tipo.gasto.index')->middleware('permission:tipo.gasto.index');
+    Route::post('/register', [TipoGastoController::class, 'create'])->name('tipo.gasto.create.post')->middleware('permission:tipo.gasto.crear');
+    Route::put('/update', [TipoGastoController::class, 'update'])->name('tipo.gasto.update.put')->middleware('permission:tipo.gasto.editar.avanzado');
+});
+
+// Route::get('/try', function(){
+
+//     \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.index' ]);
+//     \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.crear' ]);
+//     \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.editar.basico' ]);
+//     \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.editar.avanzado' ]);
+//     \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.eliminar' ]);
+
+//     \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.index' ]);
+//     \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.crear' ]);
+//     \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.editar.basico' ]);
+//     \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.editar.avanzado' ]);
+//     \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.eliminar' ]);
+// });
+
 
 // Route::get('/empleado/register', [EmpleadoController::class, 'register'])->name('empleado.create')->middleware('auth');
 // Route::get('/empleado/update/{id}', [EmpleadoController::class, 'updateView'])->name('empleado.update')->middleware('auth');
@@ -68,12 +103,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 // Route::post('/horario/register', [HorarioController::class, 'create'])->name('horario.create.post')->middleware('auth');
 // Route::put('/horario/update', [HorarioController::class, 'update'])->name('horario.update.put')->middleware('auth');
 // Route::delete('/horario/delete', [HorarioController::class, 'delete'])->name('horario.delete')->middleware('auth');
-
-// Route::get('/cliente/register', [ClienteController::class, 'register'])->name('cliente.create')->middleware('auth');
-// Route::get('/cliente/update/{id}', [ClienteController::class, 'updateView'])->name('cliente.update')->middleware('auth');
-// Route::get('/cliente/list', [ClienteController::class, 'index'])->name('cliente.index')->middleware('auth');
-// Route::post('/cliente/register', [ClienteController::class, 'create'])->name('cliente.create.post')->middleware('auth');
-// Route::put('/cliente/update', [ClienteController::class, 'update'])->name('cliente.update.put')->middleware('auth');
 
 // Route::get('/cobro/register', [CobroController::class, 'register'])->name('cobro.create')->middleware('auth');
 // Route::get('/cobro/update/{id}', [CobroController::class, 'updateView'])->name('cobro.update')->middleware('auth');

@@ -8,12 +8,12 @@
         <div class="row">
             <div class="col-8">
                 <!-- general form elements -->
-                <div class="card card-primary container">
+                <x-toast-message></x-toast-message>
+                <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Actualizar Cliente</h3>
                     </div>
                     <!-- /.card-header -->
-                    <x-toast-message></x-toast-message>
                     <!-- form start -->
                     <form method="POST" action="{{ route('cliente.update.put') }}">
                         @csrf
@@ -21,8 +21,15 @@
                         <input type="hidden" name="id" value="{{$cliente->id}}">
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="tipo_cliente">Tipo Cliente</label>
+                                <select class="custom-select" id="tipo_cliente" name="tipo_cliente">
+                                    <option value="1" {{ $cliente->tipo_cliente == 1 ? 'selected' : '' }}>Local</option>
+                                    <option value="2" {{ $cliente->tipo_cliente == 2 ? 'selected' : '' }}>Extranjero</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputCedula1">Cedula</label>
-                                <input type="text" name="cedula" value="{{ $cliente->cedula }}" id="cedula" onkeypress="return soloNumeros(event)" class="form-control" id="exampleInputCedula1" required>
+                                <input type="text" disabled name="cedula" value="{{ $cliente->cedula }}" id="cedula" onkeypress="return soloNumeros(event)" class="form-control" id="exampleInputCedula1" required>
                                 <div class="invalid-feedback">
                                     Cedula invalida.
                                 </div>
@@ -63,7 +70,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Crear Cliente</button>
+                            <button type="submit" class="btn btn-primary float-right">Actualizar Cliente</button>
                         </div>
                     </form>
                 </div>
@@ -72,14 +79,14 @@
             <div class="col-4">
                 <!-- general form elements -->
                 <div class="card card-primary container">
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-lg">
-                        Registrar Cobro
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-ventas">
+                        Registrar venta
                     </button>
                 </div>
                 <div class="container">
                     <div class="card card-info">
                         <div class="card-header">
-                        <h3 class="card-title">Lista Cobros</h3>
+                        <h3 class="card-title">Lista Ventas</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -97,7 +104,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($cliente->cobros as $cobro)
+                                    {{--@forelse($cliente->cobros as $cobro)
                                         <tr>
                                             <td>{{$cobro->fecha}}</td>
                                             <td>{{$cobro->coste}}</td>
@@ -108,7 +115,7 @@
                                             </td>
                                         </tr>
                                         <div class="modal fade" id="modal-cobro-{{$cobro->id}}">
-                                            <div class="modal-dialog modal-lg">
+                                            <div class="modal-dialog modal-ventas">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                 <h4 class="modal-title">Registro de cobros a cliente {{$cliente->nombres.' '.$cliente->apellidos}}</h4>
@@ -151,7 +158,7 @@
                                             <!-- /.modal-dialog -->
                                         </div>
                                     @empty
-                                    @endforelse
+                                    @endforelse--}}
                                 </tbody>
                             </table>
                         </div>
@@ -162,16 +169,16 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modal-lg">
+    <div class="modal fade" id="modal-ventas">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Registro de cobros a cliente {{$cliente->nombres.' '.$cliente->apellidos}}</h4>
+              <h4 class="modal-title">Registro de venta a cliente {{$cliente->nombres.' '.$cliente->apellidos}}</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form method="POST" action="{{ route('cobro.create') }}">
+            <form method="POST" action="">
                 <div class="modal-body">
                     @csrf
                     <input type="hidden" name="cliente_id" value="{{$cliente->id}}">
@@ -196,7 +203,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Registrar cobro</button>
+                    <button type="submit" class="btn btn-primary">Registrar venta</button>
                 </div>
             </form>
           </div>

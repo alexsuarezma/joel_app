@@ -12,6 +12,7 @@ class ClienteController extends Controller
     public function create(Request $request){
 
         $validatedData = $request->validate([
+            'tipo_cliente'  => 'required|numeric',
             'cedula' => 'required|numeric|unique:clientes|between:0000000000,9999999999',
             'nombres' => 'required|string|max:60',
             'apellidos' => 'required|string|max:60',
@@ -30,6 +31,7 @@ class ClienteController extends Controller
 
             $cliente = new Cliente();
 
+            $cliente->tipo_cliente = $request->input('tipo_cliente');
             $cliente->cedula = $request->input('cedula');
             $cliente->nombres = $request->input('nombres'); 
             $cliente->apellidos = $request->input('apellidos'); 
@@ -56,6 +58,7 @@ class ClienteController extends Controller
     public function update(Request $request){
         $validatedData = $request->validate([
             'id' => 'required',
+            'tipo_cliente'  => 'required|numeric',
             'cedula' => 'required|numeric|between:0000000000,9999999999|unique:clientes,cedula,'.$request->input('id'),
             'nombres' => 'required|string|max:60',
             'apellidos' => 'required|string|max:60',
@@ -74,6 +77,7 @@ class ClienteController extends Controller
                 throw new \Exception("El cliente al que intenta acceder no se encuentra", 1);
             }
 
+            $cliente->tipo_cliente = $request->input('tipo_cliente');
             $cliente->cedula = $request->input('cedula');
             $cliente->nombres = $request->input('nombres'); 
             $cliente->apellidos = $request->input('apellidos'); 
@@ -100,9 +104,7 @@ class ClienteController extends Controller
 
     public function index(){
         $clientes = Cliente::orderBy('created_at','desc')->paginate(10);
-        return view('cliente.index', [
-            'clientes' => $clientes
-        ]);
+        return view('cliente.index');
     }
 
     public function updateView($id){

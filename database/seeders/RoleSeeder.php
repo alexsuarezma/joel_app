@@ -34,5 +34,16 @@ class RoleSeeder extends Seeder
         Permission::create([ 'name' => 'rol.asignar' ])->assignRole($admin);
         Permission::create([ 'name' => 'rol.revocar' ])->assignRole($admin);
         
+        Permission::create([ 'name' => 'cliente.index' ])->assignRole($admin);
+        Permission::create([ 'name' => 'cliente.crear' ])->assignRole($admin);
+        Permission::create([ 'name' => 'cliente.editar.basico' ])->assignRole($admin);
+        Permission::create([ 'name' => 'cliente.editar.avanzado' ])->assignRole($admin);
+        Permission::create([ 'name' => 'cliente.eliminar' ])->assignRole($admin);
+
+        Permission::create([ 'name' => 'tipo.gasto.index' ])->assignRole($admin);
+        Permission::create([ 'name' => 'tipo.gasto.crear' ])->assignRole($admin);
+        Permission::create([ 'name' => 'tipo.gasto.editar.basico' ])->assignRole($admin);
+        Permission::create([ 'name' => 'tipo.gasto.editar.avanzado' ])->assignRole($admin);
+        Permission::create([ 'name' => 'tipo.gasto.eliminar' ])->assignRole($admin);
     }
 }

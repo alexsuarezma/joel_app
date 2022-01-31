@@ -11,7 +11,7 @@ class Cliente extends Model
     
     protected $table = 'clientes';
 
-    public function cobros(){
-        return $this->hasMany('App\Models\Cobro');
-    }
+    // public function cobros(){
+    //     return $this->hasMany('App\Models\Cobro');
+    // }
 }
