@@ -75,20 +75,20 @@ Route::middleware('auth')->prefix('tipo/gasto')->group(function () {
     Route::put('/update', [TipoGastoController::class, 'update'])->name('tipo.gasto.update.put')->middleware('permission:tipo.gasto.editar.avanzado');
 });
 
-// Route::get('/try', function(){
+Route::get('/try', function(){
 
-//     \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.index' ]);
-//     \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.crear' ]);
-//     \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.editar.basico' ]);
-//     \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.editar.avanzado' ]);
-//     \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.eliminar' ]);
+    \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.index' ]);
+    \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.crear' ]);
+    \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.editar.basico' ]);
+    \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.editar.avanzado' ]);
+    \Spatie\Permission\Models\Permission::create([ 'name' => 'cliente.eliminar' ]);
 
-//     \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.index' ]);
-//     \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.crear' ]);
-//     \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.editar.basico' ]);
-//     \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.editar.avanzado' ]);
-//     \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.eliminar' ]);
-// });
+    \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.index' ]);
+    \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.crear' ]);
+    \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.editar.basico' ]);
+    \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.editar.avanzado' ]);
+    \Spatie\Permission\Models\Permission::create([ 'name' => 'tipo.gasto.eliminar' ]);
+});
 
 
 // Route::get('/empleado/register', [EmpleadoController::class, 'register'])->name('empleado.create')->middleware('auth');
