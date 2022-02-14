@@ -3,9 +3,9 @@
         Actualizar empleado
     </x-slot>
     @if(!empty($empleado))
-    <div class="container-md d-flex justify-content-center">
+    <div class="container">
         <!-- general form elements -->
-        <div class="card card-primary container">
+        <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Actualizar Empleado</h3>
             </div>
@@ -43,7 +43,7 @@
                         <label for="exampleInputDireccion1">Dirección</label>
                         <input type="text" name="direccion" value="{{ $empleado->direccion }}" class="form-control" id="exampleInputDireccion1" required>
                     </div>
-                    <div class="form-group">
+                    {{--<div class="form-group">
                         <label for="exampleInputHorario1">Horario</label>
                         <select class="form-control" name="horario_id" id="exampleInputHorario1">
                             @if(!empty($horarios)) <option disabled selected>Escoja un horario</option> @endif
@@ -53,11 +53,11 @@
                                 <option disabled selected>No existen horarios</option>
                             @endforelse
                         </select>
-                    </div>
+                    </div>--}}
                     
                     <div class="form-group">
                         <label>Fecha Ingreso</label>
-                        <input type="date" name="fecha_ingreso" value="{{ $empleado->fecha_ingreso }}" class="form-control"  required/>
+                        <input type="date" name="fecha_ingreso" value="{{ date('Y-m-d', strtotime($empleado->fecha_ingreso)) }}" class="form-control"  required/>
                     </div>
                 </div>
                 <!-- /.card-body -->

@@ -51,7 +51,7 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-        <a href="/" class="h1"><b>Joel</b>APP</a>
+        <a href="/" class="h1"><b>Papaya</b>WEB</a>
         </div>
         <x-toast-message></x-toast-message>
         <div class="card-body">

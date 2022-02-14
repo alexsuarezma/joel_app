@@ -45,5 +45,48 @@ class RoleSeeder extends Seeder
         Permission::create([ 'name' => 'tipo.gasto.editar.basico' ])->assignRole($admin);
         Permission::create([ 'name' => 'tipo.gasto.editar.avanzado' ])->assignRole($admin);
         Permission::create([ 'name' => 'tipo.gasto.eliminar' ])->assignRole($admin);
+
+        Permission::create([ 'name' => 'producto.index' ])->assignRole($admin);
+        Permission::create([ 'name' => 'producto.crear' ])->assignRole($admin);
+        Permission::create([ 'name' => 'producto.editar.basico' ])->assignRole($admin);
+        Permission::create([ 'name' => 'producto.editar.avanzado' ])->assignRole($admin);
+        Permission::create([ 'name' => 'producto.eliminar' ])->assignRole($admin);
+
+        Permission::create([ 'name' => 'sector.index' ])->assignRole($admin);
+        Permission::create([ 'name' => 'sector.crear' ])->assignRole($admin);
+        Permission::create([ 'name' => 'sector.editar.basico' ])->assignRole($admin);
+        Permission::create([ 'name' => 'sector.editar.avanzado' ])->assignRole($admin);
+        Permission::create([ 'name' => 'sector.eliminar' ])->assignRole($admin);
+
+        Permission::create([ 'name' => 'lote.index' ])->assignRole($admin);
+        Permission::create([ 'name' => 'lote.crear' ])->assignRole($admin);
+        Permission::create([ 'name' => 'lote.editar.basico' ])->assignRole($admin);
+        Permission::create([ 'name' => 'lote.editar.avanzado' ])->assignRole($admin);
+        Permission::create([ 'name' => 'lote.eliminar' ])->assignRole($admin);
+
+        Permission::create([ 'name' => 'gasto.index' ])->assignRole($admin);
+        Permission::create([ 'name' => 'gasto.crear' ])->assignRole($admin);
+        Permission::create([ 'name' => 'gasto.editar.basico' ])->assignRole($admin);
+        Permission::create([ 'name' => 'gasto.editar.avanzado' ])->assignRole($admin);
+        Permission::create([ 'name' => 'gasto.eliminar' ])->assignRole($admin);
+
+        Permission::create([ 'name' => 'produccion.index' ])->assignRole($admin);
+        Permission::create([ 'name' => 'produccion.crear' ])->assignRole($admin);
+        Permission::create([ 'name' => 'produccion.editar.basico' ])->assignRole($admin);
+        Permission::create([ 'name' => 'produccion.editar.avanzado' ])->assignRole($admin);
+        Permission::create([ 'name' => 'produccion.eliminar' ])->assignRole($admin);
+
+        Permission::create([ 'name' => 'venta.index' ])->assignRole($admin);
+        Permission::create([ 'name' => 'venta.crear' ])->assignRole($admin);
+        Permission::create([ 'name' => 'venta.editar.basico' ])->assignRole($admin);
+        Permission::create([ 'name' => 'venta.editar.avanzado' ])->assignRole($admin);
+        Permission::create([ 'name' => 'venta.eliminar' ])->assignRole($admin);
+
+        Permission::create([ 'name' => 'empleado.index' ])->assignRole($admin);
+        Permission::create([ 'name' => 'empleado.crear' ])->assignRole($admin);
+        Permission::create([ 'name' => 'empleado.editar.basico' ])->assignRole($admin);
+        Permission::create([ 'name' => 'empleado.editar.avanzado' ])->assignRole($admin);
+        Permission::create([ 'name' => 'empleado.eliminar' ])->assignRole($admin);
+        
     }
 }

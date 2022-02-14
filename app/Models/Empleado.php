@@ -21,7 +21,7 @@ class Empleado extends Model
     //         'id'
     //     );
     // }
-    public function horario(){
-        return $this->belongsTo('App\Models\Horario','horario_id');
-    }
+    // public function horario(){
+    //     return $this->belongsTo('App\Models\Horario','horario_id');
+    // }
 }

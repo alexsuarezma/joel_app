@@ -76,11 +76,11 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-dark">
+  <nav class="main-header navbar navbar-expand bg-success">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color:white;"></i></a>
       </li>
       <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="/" class="nav-link">Inicio</a>
@@ -95,7 +95,7 @@
       <!-- Navbar Search -->
       <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
+          <i class="fas fa-search" style="color:white;"></i>
         </a>
         <div class="navbar-search-block">
           <form class="form-inline">
@@ -103,10 +103,10 @@
               <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
               <div class="input-group-append">
                 <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
+                  <i class="fas fa-search" style="color:white;"></i>
                 </button>
                 <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
+                  <i class="fas fa-times" style="color:white;"></i>
                 </button>
               </div>
             </div>
@@ -116,14 +116,14 @@
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
+          <i class="far fa-bell" style="color:white;"></i>
           <span class="badge badge-warning navbar-badge">15</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">15 Notificaciones</span>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 nuevos mensajes
+            <i class="fas fa-envelope mr-2" style="color:white;"></i> 4 nuevos mensajes
             <span class="float-right text-muted text-sm">3 mins</span>
           </a>
           <div class="dropdown-divider"></div>
@@ -132,13 +132,13 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
+          <i class="fas fa-expand-arrows-alt" style="color:white;"></i>
         </a>
       </li>
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fas fa-user-alt"></i>
+          <i class="fas fa-user-alt" style="color:white;"></i>
           <!-- <span class="badge badge-danger navbar-badge">3</span> -->
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -157,11 +157,11 @@
     </ul>
   </nav>
   <!-- /.navbar -->
-
+  
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-green elevation-4">
+  <aside class="main-sidebar sidebar-dark-green elevation-4" style="background-color: rgb(15, 97, 0);">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{ route('dashboard') }}" class="brand-link">
       <svg class="pl-2" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve" width="30">
         <path style="fill:#DEC33D;" d="M411.813,212.139c-11.026-22.588-27.216-42.088-46.209-58.554
@@ -285,21 +285,12 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item {{ Route::is('dashboard') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}">
+            <a href="{{ route('dashboard') }}" class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/dashboard" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard</p>
-                </a>
-              </li>
-            </ul>
           </li>
           @if(\Auth::user()->can('usuario.create') || \Auth::user()->can('usuario.index') || \Auth::user()->can('usuario.editar.avanzado') || \Auth::user()->can('usuario.desactivar.activar'))
             <li class="nav-header">SEGURIDAD</li>
@@ -353,58 +344,281 @@
             </li>
           @endif
           <li class="nav-header">GESTION INTERNA</li>
-          @if(\Auth::user()->can('cliente.create') || \Auth::user()->can('cliente.index') || \Auth::user()->can('cliente.editar.avanzado'))
-            <li class="nav-item {{ Route::is('cliente.create') || Route::is('cliente.index') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-copy"></i>
+          <li class="nav-item {{ Route::is('cliente.create') || Route::is('cliente.index') 
+                                || Route::is('tipo.gasto.create') || Route::is('tipo.gasto.index') || Route::is('tipo.gasto.update')
+                                  ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link">
+                <i class="nav-icon far fa-plus-square"></i>
                 <p>
-                  Clientes
-                  <i class="fas fa-angle-left right"></i>
+                MANTENIMIENTO
+                <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: {{ Route::is('cliente.create') || Route::is('cliente.index') 
+                                                        || Route::is('tipo.gasto.create') || Route::is('tipo.gasto.index') || Route::is('tipo.gasto.update')
+                                                        || Route::is('producto.create') || Route::is('producto.index') || Route::is('producto.update')
+                                                        || Route::is('sector.create') || Route::is('sector.index') || Route::is('sector.update')
+                                                        || Route::is('lote.create') || Route::is('lote.index') || Route::is('lote.update')
+                                                        || Route::is('empleado.create') || Route::is('empleado.index') || Route::is('empleado.update')
+                                                      ? 'block' : 'none' }};">
+                @if(\Auth::user()->can('cliente.crear') || \Auth::user()->can('cliente.index') || \Auth::user()->can('cliente.editar.avanzado'))
+                  <li class="nav-item {{ Route::is('cliente.create') || Route::is('cliente.index') ? 'menu-is-opening menu-open' : '' }}">
+                      <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>
+                              Clientes
+                          <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview" style="display: {{ Route::is('cliente.create') || Route::is('cliente.index') ? 'block' : 'none' }};">
+                          @can('cliente.crear')
+                              <li class="nav-item">
+                              <a href="{{ route('cliente.create') }}" class="nav-link {{ Route::is('cliente.create') ? 'active' : '' }}">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Crear Cliente</p>
+                              </a>
+                              </li>
+                          @endcan
+                          @can('cliente.index')
+                              <li class="nav-item">
+                              <a href="{{ route('cliente.index') }}" class="nav-link {{ Route::is('cliente.index') ? 'active' : '' }}">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Lista de clientes</p>
+                              </a>
+                              </li>
+                          @endcan
+                      </ul>
+                  </li>
+                @endif
+                @if(\Auth::user()->can('empleado.crear') || \Auth::user()->can('empleado.index') || \Auth::user()->can('empleado.editar.avanzado'))
+                  <li class="nav-item {{ Route::is('empleado.create') || Route::is('empleado.index') ? 'menu-is-opening menu-open' : '' }}">
+                      <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>
+                              Empleado
+                          <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview" style="display: {{ Route::is('empleado.create') || Route::is('empleado.index') ? 'block' : 'none' }};">
+                          @can('empleado.crear')
+                              <li class="nav-item">
+                              <a href="{{ route('empleado.create') }}" class="nav-link {{ Route::is('empleado.create') ? 'active' : '' }}">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Crear Empleado</p>
+                              </a>
+                              </li>
+                          @endcan
+                          @can('empleado.index')
+                              <li class="nav-item">
+                              <a href="{{ route('empleado.index') }}" class="nav-link {{ Route::is('empleado.index') ? 'active' : '' }}">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Lista de Empleados</p>
+                              </a>
+                              </li>
+                          @endcan
+                      </ul>
+                  </li>
+                @endif
+                @if(\Auth::user()->can('tipo.gasto.crear') || \Auth::user()->can('tipo.gasto.index') || \Auth::user()->can('tipo.gasto.editar.avanzado'))
+                  <li class="nav-item {{ Route::is('tipo.gasto.create') || Route::is('tipo.gasto.index') || Route::is('tipo.gasto.update') ? 'menu-is-opening menu-open' : '' }}">
+                      <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>
+                            Tipos Gastos
+                          <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview" style="display: {{ Route::is('tipo.gasto.create') || Route::is('tipo.gasto.index') || Route::is('tipo.gasto.update') ? 'block' : 'none' }};">
+                        @can('tipo.gasto.crear')
+                          <li class="nav-item">
+                            <a href="{{ route('tipo.gasto.create') }}" class="nav-link {{ Route::is('tipo.gasto.create') ? 'active' : '' }}">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Crear Tipo Gasto</p>
+                            </a>
+                          </li>
+                        @endcan
+                        @can('tipo.gasto.index')
+                          <li class="nav-item">
+                            <a href="{{ route('tipo.gasto.index') }}" class="nav-link {{ Route::is('tipo.gasto.index') ? 'active' : '' }}">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Lista Tipo Gasto</p>
+                            </a>
+                          </li>
+                        @endcan
+                      </ul>
+                  </li>
+                @endif
+                @if(\Auth::user()->can('producto.crear') || \Auth::user()->can('producto.index') || \Auth::user()->can('producto.editar.avanzado'))
+                  <li class="nav-item {{ Route::is('producto.create') || Route::is('producto.index') || Route::is('producto.update') ? 'menu-is-opening menu-open' : '' }}">
+                      <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>
+                            Productos
+                          <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview" style="display: {{ Route::is('producto.create') || Route::is('producto.index') || Route::is('producto.update') ? 'block' : 'none' }};">
+                        @can('producto.crear')
+                          <li class="nav-item">
+                            <a href="{{ route('producto.create') }}" class="nav-link {{ Route::is('producto.create') ? 'active' : '' }}">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Crear Producto</p>
+                            </a>
+                          </li>
+                        @endcan
+                        @can('producto.index')
+                          <li class="nav-item">
+                            <a href="{{ route('producto.index') }}" class="nav-link {{ Route::is('producto.index') ? 'active' : '' }}">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Lista Productos</p>
+                            </a>
+                          </li>
+                        @endcan
+                      </ul>
+                  </li>
+                @endif
+                @if(\Auth::user()->can('sector.crear') || \Auth::user()->can('sector.index') || \Auth::user()->can('sector.editar.avanzado'))
+                  <li class="nav-item {{ Route::is('sector.create') || Route::is('sector.index') || Route::is('sector.update') ? 'menu-is-opening menu-open' : '' }}">
+                      <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>
+                            Sector
+                          <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview" style="display: {{ Route::is('sector.create') || Route::is('sector.index') || Route::is('sector.update') ? 'block' : 'none' }};">
+                        @can('sector.crear')
+                          <li class="nav-item">
+                            <a href="{{ route('sector.create') }}" class="nav-link {{ Route::is('sector.create') ? 'active' : '' }}">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Crear Sector</p>
+                            </a>
+                          </li>
+                        @endcan
+                        @can('sector.index')
+                          <li class="nav-item">
+                            <a href="{{ route('sector.index') }}" class="nav-link {{ Route::is('sector.index') ? 'active' : '' }}">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Lista Sector</p>
+                            </a>
+                          </li>
+                        @endcan
+                      </ul>
+                  </li>
+                @endif
+                @if(\Auth::user()->can('lote.crear') || \Auth::user()->can('lote.index') || \Auth::user()->can('lote.editar.avanzado'))
+                  <li class="nav-item {{ Route::is('lote.create') || Route::is('lote.index') || Route::is('lote.update') ? 'menu-is-opening menu-open' : '' }}">
+                      <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>
+                            Hectarea
+                          <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview" style="display: {{ Route::is('lote.create') || Route::is('lote.index') || Route::is('lote.update') ? 'block' : 'none' }};">
+                        @can('lote.crear')
+                          <li class="nav-item">
+                            <a href="{{ route('lote.create') }}" class="nav-link {{ Route::is('lote.create') ? 'active' : '' }}">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Crear Hectarea</p>
+                            </a>
+                          </li>
+                        @endcan
+                        @can('lote.index')
+                          <li class="nav-item">
+                            <a href="{{ route('lote.index') }}" class="nav-link {{ Route::is('lote.index') ? 'active' : '' }}">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Lista Hectarea</p>
+                            </a>
+                          </li>
+                        @endcan
+                      </ul>
+                  </li>
+                @endif
+            </ul>
+          </li>
+          <li class="nav-header">PROCESOS</li>
+          @if(\Auth::user()->can('gasto.crear') || \Auth::user()->can('gasto.index') || \Auth::user()->can('gasto.editar.avanzado') || \Auth::user()->can('gasto.eliminar'))
+            <li class="nav-item {{ Route::is('gasto.create') || Route::is('gasto.index') || Route::is('gasto.update') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-chart-pie"></i>
+                <p>
+                  Gastos
+                  <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                @can('cliente.crear')
+                @can('gasto.crear')
                   <li class="nav-item">
-                    <a href="{{ route('cliente.create') }}" class="nav-link {{ Route::is('cliente.create') ? 'active' : '' }}">
+                    <a href="{{ route('gasto.create') }}" class="nav-link {{ Route::is('gasto.create') ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Crear Cliente</p>
+                      <p>Ingreso de Gasto</p>
                     </a>
                   </li>
                 @endcan
-                @can('cliente.index')
+                @if(\Auth::user()->can('gasto.index') || \Auth::user()->can('gasto.eliminar'))
                   <li class="nav-item">
-                    <a href="{{ route('cliente.index') }}" class="nav-link {{ Route::is('cliente.index') ? 'active' : '' }}">
+                    <a href="{{ route('gasto.index') }}" class="nav-link {{ Route::is('gasto.index') || Route::is('gasto.update') ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Lista de clientes</p>
+                      <p>Reporte de Gastos</p>
                     </a>
                   </li>
                 @endcan
               </ul>
             </li>
           @endif
-          @if(\Auth::user()->can('tipo.gasto.create') || \Auth::user()->can('tipo.gasto.index') || \Auth::user()->can('tipo.gasto.editar.avanzado'))
-            <li class="nav-item {{ Route::is('tipo.gasto.create') || Route::is('tipo.gasto.index') || Route::is('tipo.gasto.update') ? 'menu-open' : '' }}">
+          @if(\Auth::user()->can('produccion.crear') || \Auth::user()->can('produccion.index') || \Auth::user()->can('produccion.editar.avanzado') || \Auth::user()->can('produccion.desactivar.activar'))
+            <li class="nav-item {{ Route::is('produccion.create') || Route::is('produccion.index') || Route::is('produccion.update') ? 'menu-open' : '' }}">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-copy"></i>
+                <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
-                  Tipos Gastos
-                  <i class="fas fa-angle-left right"></i>
+                  Producción
+                  <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                @can('tipo.gasto.crear')
+                @can('produccion.crear')
                   <li class="nav-item">
-                    <a href="{{ route('tipo.gasto.create') }}" class="nav-link {{ Route::is('tipo.gasto.create') ? 'active' : '' }}">
+                    <a href="{{ route('produccion.create') }}" class="nav-link {{ Route::is('produccion.create') ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Crear Tipo Gasto</p>
+                      <p>Ingreso de produccion</p>
                     </a>
                   </li>
                 @endcan
-                @can('tipo.gasto.index')
+                @can('produccion.index')
                   <li class="nav-item">
-                    <a href="{{ route('tipo.gasto.index') }}" class="nav-link {{ Route::is('tipo.gasto.index') ? 'active' : '' }}">
+                    <a href="{{ route('produccion.index') }}" class="nav-link {{ Route::is('produccion.index') || Route::is('produccion.update') ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Lista Tipo Gasto</p>
+                      <p>Reporte de Produccion</p>
+                    </a>
+                  </li>
+                @endcan
+              </ul>
+            </li>
+          @endif
+          @if(\Auth::user()->can('venta.crear') || \Auth::user()->can('venta.index') || \Auth::user()->can('venta.editar.avanzado') || \Auth::user()->can('venta.desactivar.activar'))
+            <li class="nav-item {{ Route::is('venta.create') || Route::is('venta.index') || Route::is('venta.update') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-chart-pie"></i>
+                <p>
+                  Venta
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                @can('venta.crear')
+                  <li class="nav-item">
+                    <a href="{{ route('venta.create') }}" class="nav-link {{ Route::is('venta.create') ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Ingreso de venta</p>
+                    </a>
+                  </li>
+                @endcan
+                @can('venta.index')
+                  <li class="nav-item">
+                    <a href="{{ route('venta.index') }}" class="nav-link {{ Route::is('venta.index') || Route::is('venta.update') ? 'active' : '' }}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Reporte de Ventas</p>
                     </a>
                   </li>
                 @endcan

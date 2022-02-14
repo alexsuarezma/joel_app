@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Empleado;
-use App\Models\Horario;
+// use App\Models\Horario;
 
 class EmpleadoController extends Controller
 {
@@ -35,7 +35,7 @@ class EmpleadoController extends Controller
             $empleado->apellidos = $request->input('apellidos'); 
             $empleado->email = $request->input('email'); 
             $empleado->direccion = $request->input('direccion'); 
-            $empleado->horario_id = $request->input('horario_id'); 
+            // $empleado->horario_id = $request->input('horario_id'); 
             $empleado->fecha_ingreso = $request->input('fecha_ingreso'); 
 
             $empleado->save();
@@ -81,7 +81,7 @@ class EmpleadoController extends Controller
             $empleado->apellidos = $request->input('apellidos'); 
             $empleado->email = $request->input('email'); 
             $empleado->direccion = $request->input('direccion'); 
-            $empleado->horario_id = $request->input('horario_id'); 
+            // $empleado->horario_id = $request->input('horario_id'); 
             $empleado->fecha_ingreso = $request->input('fecha_ingreso'); 
 
             $empleado->update();
@@ -111,13 +111,13 @@ class EmpleadoController extends Controller
         $empleado = Empleado::find($id);
         return view('empleado.actualizar', [
             'empleado' => $empleado,
-            'horarios' => Horario::all()
+            // 'horarios' => Horario::all()
         ]);
     }
 
     public function register(){
         return view('empleado.create',[
-            'horarios' => Horario::all()
+            // 'horarios' => Horario::all()
         ]);
     }
 

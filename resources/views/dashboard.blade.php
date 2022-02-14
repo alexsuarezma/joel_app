@@ -13,7 +13,7 @@
         </div>
     </div>--}}
 <!-- Content Header (Page header) -->
-<div class="content-header">
+    <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
@@ -37,13 +37,13 @@
         <div class="row">
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-money-bill"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">CPU Traffic</span>
+                <span class="info-box-text">Gastos {{$month}}</span>
                 <span class="info-box-number">
-                  10
-                  <small>%</small>
+                  {{$gastos->gastos}}
+                  <small>$</small>
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -53,11 +53,11 @@
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-hard-hat"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
+                <span class="info-box-text">Producción {{$month}}</span>
+                <span class="info-box-number">{{$produccion->produccion}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -73,8 +73,8 @@
               <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Sales</span>
-                <span class="info-box-number">760</span>
+                <span class="info-box-text">Ventas {{$month}}</span>
+                <span class="info-box-number">{{$venta->venta}} <small>$</small></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -86,8 +86,8 @@
               <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">New Members</span>
-                <span class="info-box-number">2,000</span>
+                <span class="info-box-text">Empleados</span>
+                <span class="info-box-number">{{$empleados->empleados}}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -101,13 +101,13 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title">Monthly Recap Report</h5>
+                <h5 class="card-title">Reporte Analisis Anual</h5>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button>
-                  <div class="btn-group">
+                  <!-- <div class="btn-group">
                     <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
                       <i class="fas fa-wrench"></i>
                     </button>
@@ -118,7 +118,7 @@
                       <a class="dropdown-divider"></a>
                       <a href="#" class="dropdown-item">Separated link</a>
                     </div>
-                  </div>
+                  </div> -->
                   <button type="button" class="btn btn-tool" data-card-widget="remove">
                     <i class="fas fa-times"></i>
                   </button>
@@ -865,4 +865,84 @@
       </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
+    <script src="{{ asset('/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{ asset('/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{{ asset('/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('/dist/js/adminlte.js') }}"></script>
+
+    <!-- PAGE PLUGINS -->
+    <!-- jQuery Mapael -->
+    <script src="{{ asset('/plugins/jquery-mousewheel/jquery.mousewheel.js') }}"></script>
+    <script src="{{ asset('/plugins/raphael/raphael.min.js') }}"></script>
+    <script src="{{ asset('/plugins/jquery-mapael/jquery.mapael.min.js') }}"></script>
+    <script src="{{ asset('/plugins/jquery-mapael/maps/usa_states.min.js') }}"></script>
+    <!-- ChartJS -->
+    <script src="{{ asset('/plugins/chart.js/Chart.min.js') }}"></script>
+
+    <!-- AdminLTE for demo purposes -->
+    <script src="{{ asset('/dist/js/demo.js') }}"></script>
+    <script defer type="text/javascript">
+       // Get context with jQuery - using jQuery's .get() method.
+      var salesChartCanvas = $('#salesChart').get(0).getContext('2d')
+
+      var salesChartData = {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        datasets: [
+          {
+            label: 'Gastos',
+            backgroundColor: 'rgba(60,141,188,0.9)',
+            borderColor: 'rgba(60,141,188,0.8)',
+            pointRadius: false,
+            pointColor: '#3b8bba',
+            pointStrokeColor: 'rgba(60,141,188,1)',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(60,141,188,1)',
+            data: @json($datos_gastos)
+          },
+          {
+            label: 'Ventas',
+            backgroundColor: 'rgba(210, 214, 222, 1)',
+            borderColor: 'rgba(210, 214, 222, 1)',
+            pointRadius: false,
+            pointColor: 'rgba(210, 214, 222, 1)',
+            pointStrokeColor: '#c1c7d1',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(220,220,220,1)',
+            data: @json($datos_ventas)
+          }
+        ]
+      }
+
+      var salesChartOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [{
+            gridLines: {
+              display: false
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              display: false
+            }
+          }]
+        }
+      }
+
+      // This will get the first returned node in the jQuery collection.
+      // eslint-disable-next-line no-unused-vars
+      var salesChart = new Chart(salesChartCanvas, {
+        type: 'line',
+        data: salesChartData,
+        options: salesChartOptions
+      }
+      )
+    </script>
 </x-app-layout>
