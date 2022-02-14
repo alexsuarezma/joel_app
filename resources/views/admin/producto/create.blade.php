@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPrecioUnitario1">PVP</label>
-                        <input type="text" name="precio_unitario" value="{{ $producto->precio_unitario }}" class="form-control" id="exampleInputPrecioUnitario1" onkeypress="return filterFloat(event,this)" required>
+                        <input type="text" name="precio_unitario" value="{{ old('precio_unitario') }}" class="form-control" id="exampleInputPrecioUnitario1" onkeypress="return filterFloat(event,this)" required>
                     </div>
                     <div class="form-group">
                         <label>Unidad de medida</label>
