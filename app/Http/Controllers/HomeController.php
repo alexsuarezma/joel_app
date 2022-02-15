@@ -51,6 +51,9 @@ class HomeController extends Controller
         $empleados = Empleado::select(DB::raw("ifnull(sum(empleados.id),0) as empleados"))->first();
 
         $gastos_ventas =  DB::table('vw_gastos_ventas')->where('anio', date('Y',strtotime(\Carbon\Carbon::now())))->get();
+
+        $gastos_produccion =  DB::table('vw_gastos_produccion')->where('anio', date('Y',strtotime(\Carbon\Carbon::now())))->get();
+
         $datos_gastos = array();
         $datos_ventas = array();
         
@@ -69,6 +72,7 @@ class HomeController extends Controller
             'empleados' => $empleados,
             'datos_gastos' => $datos_gastos,
             'datos_ventas' => $datos_ventas,
+            'gastos_produccion' => $gastos_produccion,
             'month' => $month
         ]);
     }

@@ -17,7 +17,10 @@ $(function () {
   //---------------------------
   // - END MONTHLY SALES CHART -
   //---------------------------
-
+  $('#calendar').datetimepicker({
+    format: 'L',
+    inline: true
+  })
   //-------------
   // - PIE CHART -
   //-------------
