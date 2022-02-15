@@ -12,7 +12,7 @@ $(function () {
   // - MONTHLY SALES CHART -
   //-----------------------
 
- 
+  
 
   //---------------------------
   // - END MONTHLY SALES CHART -

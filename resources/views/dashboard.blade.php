@@ -57,7 +57,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Producción {{$month}}</span>
-                <span class="info-box-number">{{$produccion->produccion}}</span>
+                <span class="info-box-number">{{$produccion->produccion}} lb</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -127,9 +127,9 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-8">
+                  <div class="col-md-12">
                     <p class="text-center">
-                      <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                      <strong>{{ '1 Ene ,'.date('Y', strtotime(\Carbon\Carbon::now())).' - '.'31 Dic ,'.date('Y', strtotime(\Carbon\Carbon::now())) }}</strong>
                     </p>
 
                     <div class="chart">
@@ -138,90 +138,82 @@
                     </div>
                     <!-- /.chart-responsive -->
                   </div>
-                  <!-- /.col -->
-                  <div class="col-md-4">
-                    <p class="text-center">
-                      <strong>Goal Completion</strong>
-                    </p>
-
-                    <div class="progress-group">
-                      Add Products to Cart
-                      <span class="float-right"><b>160</b>/200</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-primary" style="width: 80%"></div>
-                      </div>
-                    </div>
-                    <!-- /.progress-group -->
-
-                    <div class="progress-group">
-                      Complete Purchase
-                      <span class="float-right"><b>310</b>/400</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-danger" style="width: 75%"></div>
-                      </div>
-                    </div>
-
-                    <!-- /.progress-group -->
-                    <div class="progress-group">
-                      <span class="progress-text">Visit Premium Page</span>
-                      <span class="float-right"><b>480</b>/800</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-success" style="width: 60%"></div>
-                      </div>
-                    </div>
-
-                    <!-- /.progress-group -->
-                    <div class="progress-group">
-                      Send Inquiries
-                      <span class="float-right"><b>250</b>/500</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-warning" style="width: 50%"></div>
-                      </div>
-                    </div>
-                    <!-- /.progress-group -->
-                  </div>
-                  <!-- /.col -->
                 </div>
                 <!-- /.row -->
               </div>
               <!-- ./card-body -->
               <div class="card-footer">
                 <div class="row">
-                  <div class="col-sm-3 col-6">
+                  <div class="col-sm-4 col-6">
                     <div class="description-block border-right">
-                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                      <h5 class="description-header">$35,210.43</h5>
-                      <span class="description-text">TOTAL REVENUE</span>
+                      <span class="description-percentage text-{{ $venta_total->venta > $gastos_total->gastos ? 'success' : ( $venta_total->venta == $gastos_total->gasto ? 'warning' : 'danger' ) }}">
+                        <!-- <i class="fas fa-caret-up"></i> 17% -->
+                        @if($venta_total->venta > $gastos_total->gastos)
+                          <i class="fas fa-caret-up"></i>
+                        @elseif($venta_total->venta == $gastos_total->gastos)
+                          <i class="fas fa-caret-left"></i>
+                        @else
+                          <i class="fas fa-caret-down"></i>
+                        @endif
+                        @if($gastos_total->gastos > 0) 
+                          {{ number_format(( $venta_total->venta / $gastos_total->gastos) * 100, 2) }}%
+                        @else
+                          0% 
+                        @endif
+                      </span>
+                      <h5 class="description-header">${{$venta_total->venta}}</h5>
+                      <span class="description-text">TOTAL VENTA</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
                   <!-- /.col -->
-                  <div class="col-sm-3 col-6">
+                  <div class="col-sm-4 col-6">
                     <div class="description-block border-right">
-                      <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
-                      <h5 class="description-header">$10,390.90</h5>
-                      <span class="description-text">TOTAL COST</span>
+                      <span class="description-percentage text-{{ $gastos_total->gastos > $venta_total->venta  ? 'danger' : ( $venta_total->venta == $gastos_total->gasto ? 'warning' : 'success' ) }}">
+                        <!-- <i class="fas fa-caret-left"></i> 0%-->
+                        @if($gastos_total->gastos > $venta_total->venta)
+                          <i class="fas fa-caret-up"></i>
+                        @elseif($venta_total->venta == $gastos_total->gastos)
+                          <i class="fas fa-caret-left"></i>
+                        @else
+                          <i class="fas fa-caret-down"></i> 
+                        @endif
+                        
+                        @if($gastos_total->gastos > 0) 
+                          {{ number_format(( ($gastos_total->gastos - $venta_total->venta) / $gastos_total->gastos ) * 100, 2) }}%
+                        @else
+                          0% 
+                        @endif 
+                      </span> 
+                      <h5 class="description-header">${{$gastos_total->gastos}}</h5>
+                      <span class="description-text">TOTAL GASTOS</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
                   <!-- /.col -->
-                  <div class="col-sm-3 col-6">
+                  <div class="col-sm-4 col-6">
                     <div class="description-block border-right">
-                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
-                      <h5 class="description-header">$24,813.53</h5>
-                      <span class="description-text">TOTAL PROFIT</span>
+                      <span class="description-percentage text-{{ $produccion_total->produccion > 0  ? 'success' : 'warning' }}">
+                        <!-- <i class="fas fa-caret-up"></i> 20% -->
+                        @if($produccion_total->produccion > 0)
+                          <i class="fas fa-caret-up"></i>
+                        @else
+                          <i class="fas fa-caret-left"></i>
+                        @endif 
+                      </span>
+                      <h5 class="description-header">{{$produccion_total->produccion}} lb</h5>
+                      <span class="description-text">TOTAL PRODUCCIÓN</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
                   <!-- /.col -->
-                  <div class="col-sm-3 col-6">
+                  <!-- <div class="col-sm-3 col-6">
                     <div class="description-block">
                       <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
                       <h5 class="description-header">1200</h5>
                       <span class="description-text">GOAL COMPLETIONS</span>
                     </div>
-                    <!-- /.description-block -->
-                  </div>
+                  </div> -->
                 </div>
                 <!-- /.row -->
               </div>
@@ -864,29 +856,11 @@
         <!-- /.row -->
       </div><!--/. container-fluid -->
     </section>
-    <!-- /.content -->
-    <script src="{{ asset('/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap -->
-    <script src="{{ asset('/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- overlayScrollbars -->
-    <script src="{{ asset('/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('/dist/js/adminlte.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- PAGE PLUGINS -->
-    <!-- jQuery Mapael -->
-    <script src="{{ asset('/plugins/jquery-mousewheel/jquery.mousewheel.js') }}"></script>
-    <script src="{{ asset('/plugins/raphael/raphael.min.js') }}"></script>
-    <script src="{{ asset('/plugins/jquery-mapael/jquery.mapael.min.js') }}"></script>
-    <script src="{{ asset('/plugins/jquery-mapael/maps/usa_states.min.js') }}"></script>
-    <!-- ChartJS -->
-    <script src="{{ asset('/plugins/chart.js/Chart.min.js') }}"></script>
-
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('/dist/js/demo.js') }}"></script>
     <script defer type="text/javascript">
        // Get context with jQuery - using jQuery's .get() method.
-      var salesChartCanvas = $('#salesChart').get(0).getContext('2d')
+      var salesChartCanvas = document.getElementById('salesChart').getContext('2d') //$('#salesChart').get(0).getContext('2d')
 
       var salesChartData = {
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -895,22 +869,26 @@
             label: 'Gastos',
             backgroundColor: 'rgba(60,141,188,0.9)',
             borderColor: 'rgba(60,141,188,0.8)',
-            pointRadius: false,
+            // pointRadius: false,
             pointColor: '#3b8bba',
-            pointStrokeColor: 'rgba(60,141,188,1)',
-            pointHighlightFill: '#fff',
-            pointHighlightStroke: 'rgba(60,141,188,1)',
+            // pointStrokeColor: 'rgba(60,141,188,1)',
+            // pointHighlightFill: '#fff',
+            // pointHighlightStroke: 'rgba(60,141,188,1)',
+            fill: false,
+            tension: 0.1,
             data: @json($datos_gastos)
           },
           {
             label: 'Ventas',
             backgroundColor: 'rgba(210, 214, 222, 1)',
             borderColor: 'rgba(210, 214, 222, 1)',
-            pointRadius: false,
+            // pointRadius: false,
             pointColor: 'rgba(210, 214, 222, 1)',
-            pointStrokeColor: '#c1c7d1',
-            pointHighlightFill: '#fff',
-            pointHighlightStroke: 'rgba(220,220,220,1)',
+            // pointStrokeColor: '#c1c7d1',
+            // pointHighlightFill: '#fff',
+            // pointHighlightStroke: 'rgba(220,220,220,1)',
+            fill: false,
+            tension: 0.1,
             data: @json($datos_ventas)
           }
         ]
@@ -922,18 +900,18 @@
         legend: {
           display: false
         },
-        scales: {
-          xAxes: [{
-            gridLines: {
-              display: false
-            }
-          }],
-          yAxes: [{
-            gridLines: {
-              display: false
-            }
-          }]
-        }
+        // scales: {
+        //   xAxes: [{
+        //     gridLines: {
+        //       display: false
+        //     }
+        //   }],
+        //   yAxes: [{
+        //     gridLines: {
+        //       display: false
+        //     }
+        //   }]
+        // }
       }
 
       // This will get the first returned node in the jQuery collection.
