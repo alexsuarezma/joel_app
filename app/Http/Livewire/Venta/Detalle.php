@@ -96,7 +96,7 @@ class Detalle extends Component
         }
 
         $this->cantidad = intval($this->cajas * $this->factor);
-        $this->total = $this->cantidad * $this->precio_unitario;
+        $this->total = $this->cajas * $this->precio_unitario;
     }
 
     public function agregateDetail(){
@@ -158,7 +158,7 @@ class Detalle extends Component
         // $this->cajas = intval($this->cantidad / $this->factor);
         // $this->total = $this->cajas * $this->precio_unitario;
         $this->cantidad = intval($this->cajas * $this->factor);
-        $this->total = $this->cantidad * $this->precio_unitario;
+        $this->total = $this->cajas * $this->precio_unitario;
         $this->stock_actual = $producto->stock;
 
         $this->emit('hideModal');
