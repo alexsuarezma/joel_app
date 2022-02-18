@@ -96,6 +96,8 @@ Route::middleware('auth')->prefix('sector')->group(function () {
     Route::get('/list', [SectorLoteController::class, 'index'])->name('sector.index')->middleware('permission:sector.index');
     Route::post('/register', [SectorLoteController::class, 'create'])->name('sector.create.post')->middleware('permission:sector.crear');
     Route::put('/update', [SectorLoteController::class, 'update'])->name('sector.update.put')->middleware('permission:sector.editar.avanzado');
+    Route::put('/update/vigencia', [SectorLoteController::class, 'updateVigencia'])->name('sector.update.vigencia.put')->middleware('permission:sector.eliminar');
+    
 });
 
 Route::middleware('auth')->prefix('lote')->group(function () {
@@ -105,6 +107,7 @@ Route::middleware('auth')->prefix('lote')->group(function () {
     Route::get('/list', [SectorLoteController::class, 'index'])->name('lote.index')->middleware('permission:lote.index');
     Route::post('/register', [SectorLoteController::class, 'create'])->name('lote.create.post')->middleware('permission:lote.crear');
     Route::put('/update', [SectorLoteController::class, 'update'])->name('lote.update.put')->middleware('permission:lote.editar.avanzado');
+    Route::put('/update/vigencia', [SectorLoteController::class, 'updateVigencia'])->name('lote.update.vigencia.put')->middleware('permission:lote.eliminar');
 });
 
 Route::middleware('auth')->prefix('gasto')->group(function () {
@@ -115,6 +118,8 @@ Route::middleware('auth')->prefix('gasto')->group(function () {
     Route::post('/register', [GastoController::class, 'create'])->name('gasto.create.post')->middleware('permission:gasto.crear');
     Route::put('/update', [GastoController::class, 'update'])->name('gasto.update.put')->middleware('permission:gasto.editar.avanzado');
     Route::put('/anular', [GastoController::class, 'anular'])->name('gasto.anular.put')->middleware('permission:gasto.eliminar');
+
+    Route::post('/print/report', [GastoController::class, 'printReportToPdf'])->name('gasto.print.report.post');
 });
 
 Route::middleware('auth')->prefix('produccion')->group(function () {
@@ -125,6 +130,8 @@ Route::middleware('auth')->prefix('produccion')->group(function () {
     Route::post('/register', [ProduccionController::class, 'create'])->name('produccion.create.post')->middleware('permission:produccion.crear');
     Route::put('/update', [ProduccionController::class, 'update'])->name('produccion.update.put')->middleware('permission:produccion.editar.avanzado');
     Route::put('/anular', [ProduccionController::class, 'anular'])->name('produccion.anular.put')->middleware('permission:produccion.eliminar');
+
+    Route::post('/print/report', [ProduccionController::class, 'printReportToPdf'])->name('produccion.print.report.post');
 });
 
 Route::middleware('auth')->prefix('venta')->group(function () {
@@ -135,6 +142,8 @@ Route::middleware('auth')->prefix('venta')->group(function () {
     Route::post('/register', [VentaController::class, 'create'])->name('venta.create.post')->middleware('permission:venta.crear');
     Route::put('/update', [VentaController::class, 'update'])->name('venta.update.put')->middleware('permission:venta.editar.avanzado');
     Route::put('/anular', [VentaController::class, 'anular'])->name('venta.anular.put')->middleware('permission:venta.eliminar');
+
+    Route::post('/print/report', [VentaController::class, 'printReportToPdf'])->name('venta.print.report.post');
 });
 
 Route::middleware('auth')->prefix('empleado')->group(function () {

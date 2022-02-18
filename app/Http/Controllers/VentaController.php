@@ -163,4 +163,33 @@ class VentaController extends Controller
     public function register(){
         return view('venta.create');
     }
+
+    public function printReportToPdf(Request $request){
+        $ventas = Venta::select(DB::raw("DISTINCT ventas.*"))
+                            ->join("detalle_ventas", "ventas.id", '=', 'detalle_ventas.venta_id', 'left outer')
+                            ->where('anulado', $request->input('anulado'))
+                            ->where( function($query) use($request) {
+                                $query->where('ventas.comentario', 'LIKE', "%{$request->input('search')}%")->orWhere('ventas.id', 'LIKE', "%{$request->input('search')}%");
+                            })
+                            ->where( function($query) use($request) {
+                                if($request->input('secuencia') != ''){
+                                    $query->where('ventas.id', "{$request->input('secuencia')}");
+                                }
+                            })
+                            ->whereBetween('ventas.fecha_documento', [date('Y-m-d 00:00:00', strtotime($request->input('fecha_inicio'))),date('Y-m-d 23:59:59',strtotime($request->input('fecha_fin')))])
+                            ->where( function($query) use($request) {
+                                if($request->input('cliente_id') != ''){
+                                    $query->where('ventas.cliente_id', $request->input('cliente_id'));
+                                }
+                            })
+                            ->where( function($query) use($request) {
+                                if($request->input('producto_id') != ''){
+                                    $query->where('detalle_ventas.producto_id', $request->input('producto_id'));
+                                }
+                            })
+                            ->get();
+                            
+        $pdf = \PDF::loadView('venta.reporte_venta', ['ventas' => $ventas]);
+        return $pdf->stream('lista_venta.pdf');
+    }
 }

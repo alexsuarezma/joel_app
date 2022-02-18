@@ -48,12 +48,12 @@
         </div>
         <div class="form-group col-md-6">
             <label for="exampleInputCantidad1">Cantidad</label>
-            <input type="text" class="form-control" id="exampleInputCantidad1" wire:model.lazy="cantidad" onkeypress="return filterFloat(event,this)">
+            <input type="text" class="form-control" id="exampleInputCantidad1" wire:model.lazy="cantidad" onkeypress="return filterFloat(event,this)" readonly>
             @error('cantidad') <span class="error">{{ $message }}</span> @enderror
         </div>
         <div class="form-group col-md-6">
             <label for="exampleInputCajas1">Cajas</label>
-            <input type="text" class="form-control" id="exampleInputCajas1" wire:model.lazy="cajas" onkeypress="return filterFloat(event,this)" readonly>
+            <input type="text" class="form-control" id="exampleInputCajas1" wire:model.lazy="cajas" onkeypress="return filterFloat(event,this)">
             @error('cajas') <span class="error">{{ $message }}</span> @enderror
         </div>
         <div class="form-group col-md-6">

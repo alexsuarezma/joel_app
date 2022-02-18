@@ -15,6 +15,7 @@ class ProductoController extends Controller
         $validatedData = $request->validate([
             'descripcion' => 'required|string|max:100',
             'tipo_inventario' => 'required|string|max:2',
+            'tipo_producto' => 'required|string|max:2',
             'costo' => 'required|numeric',
             'precio_unitario' => 'required|numeric',
             'unidad_medida' => 'required|string|max:10',
@@ -31,6 +32,7 @@ class ProductoController extends Controller
 
             $producto->descripcion = $request->input('descripcion');
             $producto->tipo_inventario = $request->input('tipo_inventario');
+            $producto->tipo_producto = $request->input('tipo_producto');
             $producto->costo = $request->input('costo');
             $producto->precio_unitario = $request->input('precio_unitario');
             $producto->unidad_medida = $request->input('unidad_medida');
@@ -57,6 +59,7 @@ class ProductoController extends Controller
             'id' => 'required|numeric',
             'descripcion' => 'required|string|max:100',
             'tipo_inventario' => 'required|string|max:2',
+            'tipo_producto' => 'required|string|max:2',
             'costo' => 'required|numeric',
             'precio_unitario' => 'required|numeric',
             'unidad_medida' => 'required|string|max:10',
@@ -76,6 +79,7 @@ class ProductoController extends Controller
 
             $producto->descripcion = $request->input('descripcion');
             $producto->tipo_inventario = $request->input('tipo_inventario');
+            $producto->tipo_producto = $request->input('tipo_producto');
             $producto->costo = $request->input('costo');
             $producto->precio_unitario = $request->input('precio_unitario');
             $producto->unidad_medida = $request->input('unidad_medida');

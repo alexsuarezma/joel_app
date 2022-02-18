@@ -43,6 +43,18 @@
                         <label for="exampleInputDireccion1">Dirección</label>
                         <input type="text" name="direccion" value="{{ $empleado->direccion }}" class="form-control" id="exampleInputDireccion1" required>
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputSalario1">Salario</label>
+                        <input type="text" name="salario" value="{{ $empleado->salario }}" class="form-control" id="exampleInputSalario1" required onkeypress="return filterFloat(event,this)">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputActividad1">Actividad</label>
+                        <select class="form-control" name="actividad" id="exampleInputHorario1">
+                            <option disabled selected>Escoja una actividad</option>
+                            <option value="Vigilancia" {{ $empleado->actividad == 'Vigilancia' ? 'selected' : '' }} >Vigilancia</option>
+                            <option value="Riego" {{ $empleado->actividad == 'Riego' ? 'selected' : '' }} >Riego</option>
+                        </select>
+                    </div>
                     {{--<div class="form-group">
                         <label for="exampleInputHorario1">Horario</label>
                         <select class="form-control" name="horario_id" id="exampleInputHorario1">

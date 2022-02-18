@@ -28,6 +28,14 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Tipo producto</label>
+                        <select class="form-control" name="tipo_producto">
+                          <option disabled selected>Escoja...</option>
+                          <option value="1" {{ $producto->tipo_producto == 1 ? 'selected' : '' }}>Gasto</option>
+                          <option value="2" {{ $producto->tipo_producto == 2 ? 'selected' : '' }}>Venta</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputcosto1">Costo</label>
                         <input type="text" name="costo" value="{{ $producto->costo }}" class="form-control" id="exampleInputcosto1" onkeypress="return filterFloat(event,this)" required>
                     </div>

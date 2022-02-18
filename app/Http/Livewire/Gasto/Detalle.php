@@ -49,7 +49,10 @@ class Detalle extends Component
     public function render()
     {
         return view('livewire.gasto.detalle',[
-            'productos' => Producto::where('descripcion', 'LIKE', "%{$this->search}%")->orWhere('costo', 'LIKE', "%{$this->search}%")
+            'productos' => Producto::where('tipo_producto', '1')
+                                ->where( function($query) {
+                                    $query->where('descripcion', 'LIKE', "%{$this->search}%")->orWhere('costo', 'LIKE', "%{$this->search}%");
+                                })
                             ->paginate(10),
             'sector_lotes' => SectorLote::where( function($query) {
                                         $query->where('descripcion', 'LIKE', "%{$this->search}%")->orWhere('hectareas_area', 'LIKE', "%{$this->search}%");

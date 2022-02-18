@@ -101,8 +101,8 @@
                             <td class="project_progress">
                                 {{ $sector_lote->data == 'SC' ? 'Sector' : 'Lote' }}
                             </td>
-                            <td class="project-state">
-                                
+                            <td class="project_progress">
+                                <span class="{{ $sector_lote->vigencia == 0 ? 'badge badge-danger' : '' }}">{{ $sector_lote->anulado == 0 ? 'No Vigente' : '' }}</span>
                             </td>
                             @if(Route::is('lote.index'))
                                 @can('lote.editar.avanzado')

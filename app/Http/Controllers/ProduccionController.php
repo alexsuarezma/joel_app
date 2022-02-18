@@ -155,4 +155,32 @@ class ProduccionController extends Controller
         return view('produccion.create');
     }
 
+    public function printReportToPdf(Request $request){
+        $producciones = Produccion::select(DB::raw("DISTINCT produccion.*"))
+                                ->join("detalle_produccion", "produccion.id", '=', 'detalle_produccion.produccion_id', 'left outer')
+                                ->where('anulado', $request->input('anulado'))
+                                ->where( function($query) use($request) {
+                                    $query->where('produccion.comentario', 'LIKE', "%{$request->input('search')}%")->orWhere('produccion.id', 'LIKE', "%{$request->input('search')}%");
+                                })
+                                ->where( function($query) use($request) {
+                                    if($request->input('secuencia') != ''){
+                                        $query->where('produccion.id', "{$request->input('secuencia')}");
+                                    }
+                                })
+                                ->whereBetween('produccion.fecha_documento', [date('Y-m-d 00:00:00', strtotime($request->input('fecha_inicio'))),date('Y-m-d 23:59:59',strtotime($request->input('fecha_fin')))])
+                                ->where( function($query) use($request) {
+                                    if($request->input('sector_lote_id') != ''){
+                                        $query->where('produccion.sector_lote_id', $request->input('sector_lote_id'));
+                                    }
+                                })
+                                ->where( function($query) use($request) {
+                                    if($request->input('producto_id') != ''){
+                                        $query->where('detalle_produccion.producto_id', $request->input('producto_id'));
+                                    }
+                                })
+                            ->get();
+                            
+        $pdf = \PDF::loadView('produccion.reporte_produccion', ['producciones' => $producciones]);
+        return $pdf->stream('lista_produccion.pdf');
+    }
 }

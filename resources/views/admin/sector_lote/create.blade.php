@@ -51,7 +51,7 @@
                         <label>Vigente</label>
                         <select class="form-control" name="vigencia">
                           <option value="1" {{ old('vigencia') == 1 ? 'selected' : '' }}>Vigente</option>
-                          <option value="0" {{ old('vigencia') == 2 ? 'selected' : '' }}>No Vigente</option>
+                          <option value="0" {{ old('vigencia') == 0 && !empty(old('vigencia')) ? 'selected' : '' }}>No Vigente</option>
                         </select>
                     </div>
                 </div>

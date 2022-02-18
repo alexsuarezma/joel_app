@@ -441,11 +441,46 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Inventory</span>
-                <span class="info-box-number"></span>
               </div>
               <!-- /.info-box-content -->
             </div>
+            <div class="card">
+              <div class="card-header border-0">
+                <h3 class="card-title">Productos (Venta)</h3>
+              </div>
+              <div class="card-body table-responsive p-0">
+                <table class="table table-striped table-valign-middle">
+                  <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Descripcion</th>
+                    <th>Medida</th>
+                    <th>Stock</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    @forelse($productos as $producto)
+                      <tr>
+                        <td>{{$producto->id}}</td>
+                        <td>
+                          <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
+                          {{$producto->descripcion}}
+                        </td>
+                        <td>
+                          {{$producto->unidad_medida}}
+                        </td>
+                        <td>
+                          {{$producto->stock}}
+                        </td>
+                      </tr>
+                    @empty
+                    @endforelse
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
+          
           <!-- /.col -->
         </div>
         <!-- /.row -->

@@ -46,7 +46,10 @@ class Detalle extends Component
     public function render()
     {
         return view('livewire.produccion.detalle',[
-            'productos' => Producto::where('descripcion', 'LIKE', "%{$this->search}%")->orWhere('costo', 'LIKE', "%{$this->search}%")
+            'productos' => Producto::where('tipo_producto', '2')
+                                        ->where( function($query) {
+                                            $query->where('descripcion', 'LIKE', "%{$this->search}%")->orWhere('costo', 'LIKE', "%{$this->search}%");
+                                        })
                             ->paginate(10),
             'sector_lotes' => SectorLote::where( function($query) {
                                             $query->where('descripcion', 'LIKE', "%{$this->search}%")->orWhere('hectareas_area', 'LIKE', "%{$this->search}%");
@@ -80,8 +83,9 @@ class Detalle extends Component
         //     $this->peso = 0;
         // }
 
+        $this->cantidad = intval($this->cajas * $this->factor);
         $this->total = $this->cantidad;
-        $this->cajas = intval($this->cantidad / $this->factor);
+        // $this->cajas = intval($this->cantidad / $this->factor);
     }
 
     public function agregateDetail(){

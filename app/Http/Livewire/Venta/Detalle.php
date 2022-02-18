@@ -51,7 +51,10 @@ class Detalle extends Component
     public function render()
     {
         return view('livewire.venta.detalle',[
-            'productos' => Producto::where('descripcion', 'LIKE', "%{$this->search}%")->orWhere('id', 'LIKE', "%{$this->search}%")
+            'productos' => Producto::where('tipo_producto', '2')
+                                ->where( function($query) {
+                                    $query->where('descripcion', 'LIKE', "%{$this->search}%")->orWhere('costo', 'LIKE', "%{$this->search}%");
+                                })
                             ->paginate(10),
             'clientes' => Cliente::where('nombres', 'LIKE', "%{$this->search}%")->orWhere('apellidos', 'LIKE', "%{$this->search}%")->
                                         orWhere('cedula', 'LIKE', "%{$this->search}%")
@@ -92,8 +95,8 @@ class Detalle extends Component
             $this->messageError = '';
         }
 
-        $this->cajas = intval($this->cantidad / $this->factor);
-        $this->total = $this->cajas * $this->precio_unitario;
+        $this->cantidad = intval($this->cajas * $this->factor);
+        $this->total = $this->cantidad * $this->precio_unitario;
     }
 
     public function agregateDetail(){
@@ -152,8 +155,10 @@ class Detalle extends Component
         $this->factor = $producto->factor;
         $this->precio_unitario = $producto->precio_unitario;
         // $this->total = $this->cantidad * $this->precio_unitario;
-        $this->cajas = intval($this->cantidad / $this->factor);
-        $this->total = $this->cajas * $this->precio_unitario;
+        // $this->cajas = intval($this->cantidad / $this->factor);
+        // $this->total = $this->cajas * $this->precio_unitario;
+        $this->cantidad = intval($this->cajas * $this->factor);
+        $this->total = $this->cantidad * $this->precio_unitario;
         $this->stock_actual = $producto->stock;
 
         $this->emit('hideModal');

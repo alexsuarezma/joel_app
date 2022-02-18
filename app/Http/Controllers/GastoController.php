@@ -134,4 +134,33 @@ class GastoController extends Controller
     public function register(){
         return view('gasto.create');
     }
+
+    public function printReportToPdf(Request $request){
+        $gastos = Gasto::select(DB::raw("DISTINCT gastos.*"))
+                                ->join("detalles_gastos", "gastos.id", '=', 'detalles_gastos.gasto_id', 'left outer')
+                                ->where('anulado', $request->input('anulado'))
+                                ->where( function($query) use($request) {
+                                    $query->where('gastos.comentario', 'LIKE', "%{$request->input('search')}%")->orWhere('gastos.id', 'LIKE', "%{$request->input('search')}%");
+                                })
+                                ->where( function($query) use($request) {
+                                    if($request->input('secuencia') != ''){
+                                        $query->where('gastos.id', "{$request->input('secuencia')}");
+                                    }
+                                })
+                                ->whereBetween('gastos.fecha_documento', [date('Y-m-d 00:00:00', strtotime($request->input('fecha_inicio'))),date('Y-m-d 23:59:59',strtotime($request->input('fecha_fin')))])
+                                ->where( function($query) use($request) {
+                                    if($request->input('sector_lote_id') != ''){
+                                        $query->where('gastos.sector_lote_id', $request->input('sector_lote_id'));
+                                    }
+                                })
+                                ->where( function($query) use($request) {
+                                    if($request->input('producto_id') != ''){
+                                        $query->where('detalles_gastos.producto_id', $request->input('producto_id'));
+                                    }
+                                })
+                            ->get();
+                            
+        $pdf = \PDF::loadView('gasto.reporte_gastos', ['gastos' => $gastos]);
+        return $pdf->stream('lista_gastos.pdf');
+    }
 }

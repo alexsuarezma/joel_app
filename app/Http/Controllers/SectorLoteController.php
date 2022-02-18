@@ -63,7 +63,7 @@ class SectorLoteController extends Controller
             $sector_lote = SectorLote::where('id', $request->input('id'))->first();
 
             if(!$sector_lote){
-                throw new \Exception("El SectorLote al que intenta acceder no se encuentra", 1);
+                throw new \Exception("El Sector/Hectarea al que intenta acceder no se encuentra", 1);
             }
 
             $sector_lote->descripcion = $request->input('descripcion');
@@ -89,6 +89,36 @@ class SectorLoteController extends Controller
         return redirect()->back()->with('success', "Información actualizada satisfactoriamente"); 
     }
 
+    public function updateVigencia(Request $request){
+        $validatedData = $request->validate([
+            'id' => 'required|numeric',
+            'vigencia'  => 'required|numeric',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $sector_lote = SectorLote::where('id', $request->input('id'))->first();
+
+            if(!$sector_lote){
+                throw new \Exception("El Sector/Hectarea al que intenta acceder no se encuentra", 1);
+            }
+
+            $sector_lote->vigencia = $request->input('vigencia');
+            $sector_lote->update();
+
+            DB::commit();
+        } catch(Illuminate\Database\QueryException $error){
+            DB::rollback();
+            return redirect()->back()->withInput()->with('error', "Hubo un error: {$error->getMessage()}");
+        }
+        catch(\Exception $error){
+            DB::rollback();
+            return redirect()->back()->withInput()->with('error', "Hubo un error: {$error->getMessage()}");
+        }
+
+        return redirect()->back()->with('success', "Información eliminada satisfactoriamente"); 
+    }
 
     public function index(){
         return view('admin.sector_lote.index');
@@ -98,13 +128,13 @@ class SectorLoteController extends Controller
         $sector_lote = SectorLote::find($id);
         return view('admin.sector_lote.actualizar', [
             'sector_lote' => $sector_lote,
-            'sectores' => SectorLote::where('data', 'SC')->get(),
+            'sectores' => SectorLote::where('data', 'SC')->where('vigencia',1)->get(),
         ]);
     }
 
     public function register(){
         return view('admin.sector_lote.create', [
-            'sectores' => SectorLote::where('data', 'SC')->get(),
+            'sectores' => SectorLote::where('data', 'SC')->where('vigencia',1)->get(),
         ]);
     }
 }

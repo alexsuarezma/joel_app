@@ -16,6 +16,8 @@ class EmpleadoController extends Controller
             'cedula' => 'required|numeric|unique:empleados|between:0000000000,9999999999',
             'nombres' => 'required|string|max:60',
             'apellidos' => 'required|string|max:60',
+            'salario' => 'required|string|max:60',
+            'actividad' => 'required|string|max:60',
             'email' => 'required|string|max:100|email|unique:users,email,',
             'direccion' => 'required|max:255',
             'fecha_ingreso'  => 'required'
@@ -35,6 +37,8 @@ class EmpleadoController extends Controller
             $empleado->apellidos = $request->input('apellidos'); 
             $empleado->email = $request->input('email'); 
             $empleado->direccion = $request->input('direccion'); 
+            $empleado->salario = $request->input('salario'); 
+            $empleado->actividad = $request->input('actividad'); 
             // $empleado->horario_id = $request->input('horario_id'); 
             $empleado->fecha_ingreso = $request->input('fecha_ingreso'); 
 
@@ -61,6 +65,8 @@ class EmpleadoController extends Controller
             'apellidos' => 'required|string|max:60',
             'email' => 'required|string|max:100|email|unique:empleados,email,'.$request->input('id'),
             'direccion' => 'required|max:255',
+            'salario' => 'required|string|max:60',
+            'actividad' => 'required|string|max:60',
             'fecha_ingreso'  => 'required|date'
         ]);
 
@@ -81,6 +87,8 @@ class EmpleadoController extends Controller
             $empleado->apellidos = $request->input('apellidos'); 
             $empleado->email = $request->input('email'); 
             $empleado->direccion = $request->input('direccion'); 
+            $empleado->salario = $request->input('salario'); 
+            $empleado->actividad = $request->input('actividad'); 
             // $empleado->horario_id = $request->input('horario_id'); 
             $empleado->fecha_ingreso = $request->input('fecha_ingreso'); 
 

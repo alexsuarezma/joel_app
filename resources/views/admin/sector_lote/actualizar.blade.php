@@ -53,13 +53,22 @@
                         <label>Vigente</label>
                         <select class="form-control" name="vigencia">
                           <option value="1" {{ $sector_lote->vigencia == 1 ? 'selected' : '' }}>Vigente</option>
-                          <option value="0" {{ $sector_lote->vigencia == 2 ? 'selected' : '' }}>No Vigente</option>
+                          <option value="0" {{ $sector_lote->vigencia == 0 ? 'selected' : '' }}>No Vigente</option>
                         </select>
                     </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary float-right">Actualizar</button>
+                    @if($sector_lote->vigencia == 1)
+                        <form method="POST" action="{{ Route::is('sector.update') ? route('sector.update.vigencia.put') : route('lote.update.vigencia.put') }}" autocomplete="off" >
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="id" value="{{$sector_lote->id}}">
+                            <input type="hidden" name="vigencia" value="{{$sector_lote->vigencia == 1 ? 0 : 1}}">
+                            <button type="submit" class="btn btn-danger float-right mr-4">Eliminar</button>
+                        </form>
+                    @endif
                 </div>
             </form>
         </div>

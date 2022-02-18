@@ -295,7 +295,7 @@
           @if(\Auth::user()->can('usuario.create') || \Auth::user()->can('usuario.index') || \Auth::user()->can('usuario.editar.avanzado') || \Auth::user()->can('usuario.desactivar.activar'))
             <li class="nav-header">SEGURIDAD</li>
             <li class="nav-item {{ Route::is('user.create') || Route::is('user.index') || Route::is('user.update') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link">
+              <a href="#" class="nav-link" style="{{ Route::is('user.create') || Route::is('user.index') || Route::is('user.update') ? 'background-color:#B5AD0E' : '' }}">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
                   Usuarios
@@ -324,7 +324,7 @@
           @endif
           @if(\Auth::user()->can('rol.crear') || \Auth::user()->can('rol.index') || \Auth::user()->can('rol.editar.avanzado') || \Auth::user()->can('rol.asignar') || \Auth::user()->can('rol.revocar'))
             <li class="nav-item {{ Route::is('role.index') | Route::is('role.create.get') | Route::is('role.update.get') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link">
+              <a href="#" class="nav-link" style="{{ Route::is('role.create') || Route::is('role.index') || Route::is('role.update') ? 'background-color:#B5AD0E' : '' }}">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
                   Roles
@@ -363,7 +363,7 @@
                                                       ? 'block' : 'none' }};">
                 @if(\Auth::user()->can('cliente.crear') || \Auth::user()->can('cliente.index') || \Auth::user()->can('cliente.editar.avanzado'))
                   <li class="nav-item {{ Route::is('cliente.create') || Route::is('cliente.index') ? 'menu-is-opening menu-open' : '' }}">
-                      <a href="#" class="nav-link">
+                      <a href="#" class="nav-link" style="{{ Route::is('cliente.create') || Route::is('cliente.index') || Route::is('cliente.update') ? 'color: white; background-color:#B5AD0E' : '' }}">
                           <i class="far fa-circle nav-icon"></i>
                           <p>
                               Clientes
@@ -392,7 +392,7 @@
                 @endif
                 @if(\Auth::user()->can('empleado.crear') || \Auth::user()->can('empleado.index') || \Auth::user()->can('empleado.editar.avanzado'))
                   <li class="nav-item {{ Route::is('empleado.create') || Route::is('empleado.index') ? 'menu-is-opening menu-open' : '' }}">
-                      <a href="#" class="nav-link">
+                      <a href="#" class="nav-link" style="{{ Route::is('empleado.create') || Route::is('empleado.index') || Route::is('empleado.update') ? 'color: white; background-color:#B5AD0E' : '' }}">
                           <i class="far fa-circle nav-icon"></i>
                           <p>
                               Empleado
@@ -421,7 +421,7 @@
                 @endif
                 @if(\Auth::user()->can('tipo.gasto.crear') || \Auth::user()->can('tipo.gasto.index') || \Auth::user()->can('tipo.gasto.editar.avanzado'))
                   <li class="nav-item {{ Route::is('tipo.gasto.create') || Route::is('tipo.gasto.index') || Route::is('tipo.gasto.update') ? 'menu-is-opening menu-open' : '' }}">
-                      <a href="#" class="nav-link">
+                      <a href="#" class="nav-link" style="{{ Route::is('tipo.gasto.create') || Route::is('tipo.gasto.index') || Route::is('tipo.gasto.update') ? 'color: white; background-color:#B5AD0E' : '' }}">
                           <i class="far fa-circle nav-icon"></i>
                           <p>
                             Tipos Gastos
@@ -450,7 +450,7 @@
                 @endif
                 @if(\Auth::user()->can('producto.crear') || \Auth::user()->can('producto.index') || \Auth::user()->can('producto.editar.avanzado'))
                   <li class="nav-item {{ Route::is('producto.create') || Route::is('producto.index') || Route::is('producto.update') ? 'menu-is-opening menu-open' : '' }}">
-                      <a href="#" class="nav-link">
+                      <a href="#" class="nav-link" style="{{ Route::is('producto.create') || Route::is('producto.index') || Route::is('producto.update') ? 'color: white; background-color:#B5AD0E' : '' }}">
                           <i class="far fa-circle nav-icon"></i>
                           <p>
                             Productos
@@ -479,7 +479,7 @@
                 @endif
                 @if(\Auth::user()->can('sector.crear') || \Auth::user()->can('sector.index') || \Auth::user()->can('sector.editar.avanzado'))
                   <li class="nav-item {{ Route::is('sector.create') || Route::is('sector.index') || Route::is('sector.update') ? 'menu-is-opening menu-open' : '' }}">
-                      <a href="#" class="nav-link">
+                      <a href="#" class="nav-link" style="{{ Route::is('sector.create') || Route::is('sector.index') || Route::is('sector.update') ? 'color: white; background-color:#B5AD0E' : '' }}">
                           <i class="far fa-circle nav-icon"></i>
                           <p>
                             Sector
@@ -508,7 +508,7 @@
                 @endif
                 @if(\Auth::user()->can('lote.crear') || \Auth::user()->can('lote.index') || \Auth::user()->can('lote.editar.avanzado'))
                   <li class="nav-item {{ Route::is('lote.create') || Route::is('lote.index') || Route::is('lote.update') ? 'menu-is-opening menu-open' : '' }}">
-                      <a href="#" class="nav-link">
+                      <a href="#" class="nav-link" style="{{ Route::is('lote.create') || Route::is('lote.index') || Route::is('lote.update') ? 'color: white; background-color:#B5AD0E' : '' }}">
                           <i class="far fa-circle nav-icon"></i>
                           <p>
                             Hectarea
@@ -540,7 +540,7 @@
           <li class="nav-header">PROCESOS</li>
           @if(\Auth::user()->can('gasto.crear') || \Auth::user()->can('gasto.index') || \Auth::user()->can('gasto.editar.avanzado') || \Auth::user()->can('gasto.eliminar'))
             <li class="nav-item {{ Route::is('gasto.create') || Route::is('gasto.index') || Route::is('gasto.update') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link">
+              <a href="#" class="nav-link" style="{{ Route::is('gasto.create') || Route::is('gasto.index') || Route::is('gasto.update') ? 'color: white; background-color:#B5AD0E' : '' }}">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
                   Gastos
@@ -569,7 +569,7 @@
           @endif
           @if(\Auth::user()->can('produccion.crear') || \Auth::user()->can('produccion.index') || \Auth::user()->can('produccion.editar.avanzado') || \Auth::user()->can('produccion.desactivar.activar'))
             <li class="nav-item {{ Route::is('produccion.create') || Route::is('produccion.index') || Route::is('produccion.update') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link">
+              <a href="#" class="nav-link" style="{{ Route::is('produccion.create') || Route::is('produccion.index') || Route::is('produccion.update') ? 'color: white; background-color:#B5AD0E' : '' }}">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
                   Producción
@@ -598,7 +598,7 @@
           @endif
           @if(\Auth::user()->can('venta.crear') || \Auth::user()->can('venta.index') || \Auth::user()->can('venta.editar.avanzado') || \Auth::user()->can('venta.desactivar.activar'))
             <li class="nav-item {{ Route::is('venta.create') || Route::is('venta.index') || Route::is('venta.update') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link">
+              <a href="#" class="nav-link" style="{{ Route::is('venta.create') || Route::is('venta.index') || Route::is('venta.update') ? 'color: white; background-color:#B5AD0E' : '' }}">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
                   Venta

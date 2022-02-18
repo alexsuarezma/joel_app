@@ -92,6 +92,19 @@
             </button>
             </div>
         </div>
+        <div class="mb-3 mr-2 mt-3">
+            <form method="POST" action="{{ route('produccion.print.report.post') }}" autocomplete="off"  target="_blank">
+                @csrf
+                <input type="hidden" name="secuencia" value="{{$secuencia}}">
+                <input type="hidden" name="producto_id" value="{{$producto_id}}">
+                <input type="hidden" name="sector_lote_id" value="{{$sector_lote_id}}">
+                <input type="hidden" name="anulado" value="{{$anulado}}">
+                <input type="hidden" name="fecha_inicio" value="{{$fecha_inicio}}">
+                <input type="hidden" name="fecha_fin" value="{{$fecha_fin}}">
+                <input type="hidden" name="search" value="{{$search}}">
+                <button type="submit" class="btn btn-default float-right"><i class="fas fa-print"></i> Imprimir PDF</button>
+            </form>
+        </div>
         <div class="card-body p-0">
             <table class="table table-striped projects">
                 <thead>

@@ -40,9 +40,9 @@
             @error('producto_id') <span class="error">{{ $message }}</span> @enderror
         </div>
         <div class="form-group col-md-6">
-            <label for="exampleInputPeso1">Cajas</label>
-            <input type="text" class="form-control" id="exampleInputPeso1" wire:model.lazy="cajas" onkeypress="return filterFloat(event,this)" readonly>
-            @error('cajas') <span class="error">{{ $message }}</span> @enderror
+            <label for="exampleInputCantidad1">Cantidad</label>
+            <input type="text" class="form-control" id="exampleInputCantidad1" wire:model.lazy="cantidad" onkeypress="return filterFloat(event,this)" readonly>
+            @error('cantidad') <span class="error">{{ $message }}</span> @enderror
         </div>
         <div class="form-group col-md-6">
             <label for="exampleInputUnidadMedida1">Unidad Medida</label>
@@ -66,9 +66,9 @@
             @error('precio_unitario') <span class="error">{{ $message }}</span> @enderror
         </div>
         <div class="form-group col-md-6">
-            <label for="exampleInputCantidad1">Cantidad</label>
-            <input type="text" class="form-control" id="exampleInputCantidad1" wire:model.lazy="cantidad" onkeypress="return filterFloat(event,this)">
-            @error('cantidad') <span class="error">{{ $message }}</span> @enderror
+            <label for="exampleInputPeso1">Cajas</label>
+            <input type="text" class="form-control" id="exampleInputPeso1" wire:model.lazy="cajas" onkeypress="return filterFloat(event,this)">
+            @error('cajas') <span class="error">{{ $message }}</span> @enderror
         </div>
         <div class="form-group col-md-6">
             <label for="exampleInputTotal1">Total</label>
