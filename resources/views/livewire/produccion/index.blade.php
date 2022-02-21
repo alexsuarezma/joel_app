@@ -168,6 +168,7 @@
                                     </i>
                                     Ver documento
                                 </a>
+                                <a href="{{ route('produccion.print.document.get', ['id' => $produccion->id] ) }}" target="_blank" rel="noopener noreferrer">Imprimir</a>
                             </td>
                         </tr>
                     @empty

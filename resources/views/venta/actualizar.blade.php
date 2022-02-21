@@ -5,7 +5,14 @@
     <div class="container">
         <!-- general form elements -->
         <x-toast-message></x-toast-message>
-        <div class="card card-success">
+        <div class="row">
+            <div class="col-md-12">
+                <a class="btn btn-info btn-sm float-right" href="{{ route('venta.print.document.get', ['id' => $venta->id] ) }}" target="_blank">
+                    <i class="fas fa-print"></i> Imprimir documento
+                </a>
+            </div>
+        </div>
+        <div class="card card-success mt-3">
             <div class="card-header">
                 <h3 class="card-title">Información del Registro de Venta #{{$venta->id}}</h3>
             </div>

@@ -174,6 +174,7 @@
                                     </i>
                                     Ver documento
                                 </a>
+                                <a href="{{ route('venta.print.document.get', ['id' => $venta->id] ) }}" target="_blank" rel="noopener noreferrer">Imprimir</a>
                             </td>
                         </tr>
                     @empty

@@ -160,7 +160,13 @@ class GastoController extends Controller
                                 })
                             ->get();
                             
-        $pdf = \PDF::loadView('gasto.reporte_gastos', ['gastos' => $gastos]);
+        $pdf = \PDF::loadView('gasto.reports.reporte_gastos', ['gastos' => $gastos]);
         return $pdf->stream('lista_gastos.pdf');
+    }
+
+    public function printDocumentToPdf($id){
+        $gasto = Gasto::where('id', $id)->first();
+        
+        return view('gasto.reports.gasto_documento', ['gasto' => $gasto]);
     }
 }

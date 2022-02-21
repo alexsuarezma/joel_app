@@ -120,6 +120,7 @@ Route::middleware('auth')->prefix('gasto')->group(function () {
     Route::put('/anular', [GastoController::class, 'anular'])->name('gasto.anular.put')->middleware('permission:gasto.eliminar');
 
     Route::post('/print/report', [GastoController::class, 'printReportToPdf'])->name('gasto.print.report.post');
+    Route::get('/print/document/{id}', [GastoController::class, 'printDocumentToPdf'])->name('gasto.print.document.get');
 });
 
 Route::middleware('auth')->prefix('produccion')->group(function () {
@@ -132,6 +133,7 @@ Route::middleware('auth')->prefix('produccion')->group(function () {
     Route::put('/anular', [ProduccionController::class, 'anular'])->name('produccion.anular.put')->middleware('permission:produccion.eliminar');
 
     Route::post('/print/report', [ProduccionController::class, 'printReportToPdf'])->name('produccion.print.report.post');
+    Route::get('/print/document/{id}', [ProduccionController::class, 'printDocumentToPdf'])->name('produccion.print.document.get');
 });
 
 Route::middleware('auth')->prefix('venta')->group(function () {
@@ -144,6 +146,7 @@ Route::middleware('auth')->prefix('venta')->group(function () {
     Route::put('/anular', [VentaController::class, 'anular'])->name('venta.anular.put')->middleware('permission:venta.eliminar');
 
     Route::post('/print/report', [VentaController::class, 'printReportToPdf'])->name('venta.print.report.post');
+    Route::get('/print/document/{id}', [VentaController::class, 'printDocumentToPdf'])->name('venta.print.document.get');
 });
 
 Route::middleware('auth')->prefix('empleado')->group(function () {

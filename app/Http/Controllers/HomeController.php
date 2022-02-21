@@ -53,7 +53,7 @@ class HomeController extends Controller
 
         $gastos_ventas =  DB::table('vw_gastos_ventas')->where('anio', date('Y',strtotime(\Carbon\Carbon::now())))->get();
 
-        $gastos_produccion =  DB::table('vw_gastos_produccion')->where('anio', date('Y',strtotime(\Carbon\Carbon::now())))->get();
+        //$gastos_produccion =  DB::table('vw_gastos_produccion')->where('anio', date('Y',strtotime(\Carbon\Carbon::now())))->get();
 
         $productos = Producto::select('id','stock','descripcion','unidad_medida')->where('tipo_producto', '2')->get();
 
@@ -75,7 +75,7 @@ class HomeController extends Controller
             'empleados' => $empleados,
             'datos_gastos' => $datos_gastos,
             'datos_ventas' => $datos_ventas,
-            'gastos_produccion' => $gastos_produccion,
+        //     'gastos_produccion' => $gastos_produccion,
             'productos' => $productos,
             'month' => $month
         ]);

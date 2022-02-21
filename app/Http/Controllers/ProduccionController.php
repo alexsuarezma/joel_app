@@ -180,7 +180,15 @@ class ProduccionController extends Controller
                                 })
                             ->get();
                             
-        $pdf = \PDF::loadView('produccion.reporte_produccion', ['producciones' => $producciones]);
+        $pdf = \PDF::loadView('produccion.reports.reporte_produccion', ['producciones' => $producciones]);
         return $pdf->stream('lista_produccion.pdf');
+    }
+    
+    public function printDocumentToPdf($id){
+        $produccion = Produccion::where('id', $id)->first();
+        
+        // $pdf = \PDF::loadView('produccion.reports.produccion_documento', ['produccion' => $produccion])->setOptions(['defaultFont' => 'sans-serif'])->setPaper("A4", "landscape");
+        // return $pdf->stream("produccion_{$id}.pdf");
+        return view('produccion.reports.produccion_documentoo', ['produccion' => $produccion]);
     }
 }

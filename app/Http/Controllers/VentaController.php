@@ -189,7 +189,13 @@ class VentaController extends Controller
                             })
                             ->get();
                             
-        $pdf = \PDF::loadView('venta.reporte_venta', ['ventas' => $ventas]);
+        $pdf = \PDF::loadView('venta.reports.reporte_venta', ['ventas' => $ventas]);
         return $pdf->stream('lista_venta.pdf');
+    }
+
+    public function printDocumentToPdf($id){
+        $venta = Venta::where('id', $id)->first();
+        
+        return view('venta.reports.venta_documento', ['venta' => $venta]);
     }
 }
