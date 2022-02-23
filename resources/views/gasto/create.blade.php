@@ -37,6 +37,7 @@
                                         'descripcion' => old('descripcion')[$i],
                                         'producto_id' => old('producto_id')[$i],
                                         'cantidad' => old('cantidad')[$i],
+                                        'hectareas_aplicado' => old('hectareas_aplicado')[$i],
                                         'costo' => old('costo')[$i],
                                         'unidad_medida' => old('unidad_medida')[$i],
                                         'factor' => old('factor')[$i],

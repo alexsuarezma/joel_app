@@ -2,6 +2,8 @@
 *   Sección validaciones frontend
 *   Use Only JS please
 */
+
+
 const validarTelefono = (input) => {
     if(input.value.length != 7){
         input.focus()

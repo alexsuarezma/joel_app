@@ -22,16 +22,19 @@ class HomeController extends Controller
         $gastos = Gasto::select(DB::raw("ifnull(sum(gastos.total_gasto),0) as gastos"))
                 ->where('anulado', 0)
                 ->whereMonth('fecha_documento', '=', date('m', strtotime(\Carbon\Carbon::now())))
+                ->whereYear('fecha_documento', date('Y', strtotime(\Carbon\Carbon::now())))
                 ->first();
 
         $produccion = Produccion::select(DB::raw("ifnull(sum(produccion.total_produccion),0) as produccion"))
                 ->where('anulado', 0)
                 ->whereMonth('fecha_documento', '=', date('m', strtotime(\Carbon\Carbon::now())))
+                ->whereYear('fecha_documento', date('Y', strtotime(\Carbon\Carbon::now())))
                 ->first();
 
         $venta = Venta::select(DB::raw("ifnull(sum(ventas.total_venta),0) as venta"))
                 ->where('anulado', 0)
                 ->whereMonth('fecha_documento', '=', date('m', strtotime(\Carbon\Carbon::now())))
+                ->whereYear('fecha_documento', date('Y', strtotime(\Carbon\Carbon::now())))
                 ->first();
 
         // $produccion_total = Produccion::select(DB::raw("ifnull(sum(produccion.total_produccion),0) as produccion"))
