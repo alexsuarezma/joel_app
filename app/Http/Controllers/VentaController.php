@@ -41,12 +41,12 @@ class VentaController extends Controller
 
             DB::beginTransaction();
 
-            if(date('Y', strtotime($request->input('fecha_documento'))) != date('Y', strtotime(\Carbon\Carbon::now()))){
-                throw new \Exception('Solo se puede registrar documentos con el año actual', 1);
-            }
-            if(date('m', strtotime($request->input('fecha_documento'))) != date('m', strtotime(\Carbon\Carbon::now()))){
-                throw new \Exception('Solo se puede registrar documentos con el mes actual', 1);
-            }
+            // if(date('Y', strtotime($request->input('fecha_documento'))) != date('Y', strtotime(\Carbon\Carbon::now()))){
+            //     throw new \Exception('Solo se puede registrar documentos con el año actual', 1);
+            // }
+            // if(date('m', strtotime($request->input('fecha_documento'))) != date('m', strtotime(\Carbon\Carbon::now()))){
+            //     throw new \Exception('Solo se puede registrar documentos con el mes actual', 1);
+            // }
 
             $venta = new Venta();
             $totalDocumento = 0;
