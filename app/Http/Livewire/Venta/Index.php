@@ -85,6 +85,11 @@ class Index extends Component
                                             $query->where('ventas.id', "{$this->secuencia}");
                                         }
                                     })
+                                    ->where( function($query) {
+                                        if($this->tipo_venta != 0){
+                                            $query->where('ventas.tipo_venta', "{$this->tipo_venta}");
+                                        }
+                                    })
                                     ->whereBetween('ventas.fecha_documento', [date('Y-m-d 00:00:00', strtotime($this->fecha_inicio)),date('Y-m-d 23:59:59',strtotime($this->fecha_fin))])
                                     ->where( function($query) {
                                         if($this->cliente_id != ''){

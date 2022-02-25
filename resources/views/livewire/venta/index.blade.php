@@ -104,6 +104,7 @@
                 @csrf
                 <input type="hidden" name="secuencia" value="{{$secuencia}}">
                 <input type="hidden" name="producto_id" value="{{$producto_id}}">
+                <input type="hidden" name="tipo_venta" value="{{$tipo_venta}}">
                 <input type="hidden" name="cliente_id" value="{{$cliente_id}}">
                 <input type="hidden" name="anulado" value="{{$anulado}}">
                 <input type="hidden" name="fecha_inicio" value="{{$fecha_inicio}}">

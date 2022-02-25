@@ -185,6 +185,11 @@ class VentaController extends Controller
                                     $query->where('ventas.id', "{$request->input('secuencia')}");
                                 }
                             })
+                            ->where( function($query) use($request) {
+                                if($request->input('tipo_venta') != 0){
+                                    $query->where('ventas.tipo_venta', "{$request->input('tipo_venta')}");
+                                }
+                            })
                             ->whereBetween('ventas.fecha_documento', [date('Y-m-d 00:00:00', strtotime($request->input('fecha_inicio'))),date('Y-m-d 23:59:59',strtotime($request->input('fecha_fin')))])
                             ->where( function($query) use($request) {
                                 if($request->input('cliente_id') != ''){
