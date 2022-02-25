@@ -160,7 +160,7 @@
                   <tr>
                     <th>Id</th>
                     <th>Descripcion</th>
-                    <th>Medida</th>
+                    <!-- <th>Medida</th> -->
                     <th>Stock</th>
                   </tr>
                   </thead>
@@ -173,10 +173,8 @@
                           {{$producto->descripcion}}
                         </td>
                         <td>
-                          {{$producto->unidad_medida}}
-                        </td>
-                        <td>
-                          {{$producto->stock}}
+                          {{$producto->stock}} {{$producto->unidad_medida}};
+                          {{number_format(($producto->stock > 0 ? ($producto->stock / $producto->factor) : $producto->stock),0) }} cajas
                         </td>
                       </tr>
                     @empty

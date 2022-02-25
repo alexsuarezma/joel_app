@@ -58,7 +58,14 @@
                                 <div class="form-group col-md-2">
                                     <input type="text" class="form-control" id="exampleInputSecuencia1" placeholder="Secuencia" wire:model="secuencia">
                                 </div>
-                                <div class="form-group col-md-4"></div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-2">
+                                    <select class="custom-select" wire:model="tipo_venta">
+                                        <option value="0">Todos</option>
+                                        <option value="1">Local</option>                    
+                                        <option value="2">Extranjera</option>
+                                    </select>
+                                </div>
                                 <div class="form-group col-md-2">
                                     <select class="custom-select" wire:model="anulado">
                                         <option value="0">No anulado</option>                    

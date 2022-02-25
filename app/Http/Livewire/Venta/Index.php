@@ -31,6 +31,7 @@ class Index extends Component
     public $fecha_fin;
     public $secuencia;
     public $anulado = 0;
+    public $tipo_venta = 0;
 
     public function mount(){
         $this->fecha_inicio = date('Y-m-', strtotime(\Carbon\Carbon::now()))."01";
@@ -54,6 +55,11 @@ class Index extends Component
                                 ->where( function($query) {
                                     if($this->secuencia != ''){
                                         $query->where('ventas.id', "{$this->secuencia}");
+                                    }
+                                })
+                                ->where( function($query) {
+                                    if($this->tipo_venta != 0){
+                                        $query->where('ventas.tipo_venta', "{$this->tipo_venta}");
                                     }
                                 })
                                 ->whereBetween('ventas.fecha_documento', [date('Y-m-d 00:00:00', strtotime($this->fecha_inicio)),date('Y-m-d 23:59:59',strtotime($this->fecha_fin))])

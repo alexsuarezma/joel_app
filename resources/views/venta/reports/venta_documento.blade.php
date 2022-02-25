@@ -69,7 +69,7 @@
           <thead>
             <tr>
               <th>No.</th>
-              <th>Producto</th>
+              <th>Id Producto</th>
               <th>Descripcion</th>
               <th>Cantidad</th>
               <th>Precio Unitario</th>
@@ -87,7 +87,7 @@
                   <th>{{$detail->producto->descripcion}}</th>
                   <th>{{$detail->cantidad}}</th>
                   <th>{{$detail->precio_unitario}}</th>
-                  <th>{{$detail->cajas}}</th>
+                  <th>{{number_format($detail->cajas,0)}}</th>
                   <th>{{$detail->unidad_medida}}</th>
                   <th>{{$detail->factor}}</th>
                   <th>{{$detail->total}}</th>

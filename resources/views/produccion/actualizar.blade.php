@@ -43,7 +43,7 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Producto</th>
+                                <th>Id Producto</th>
                                 <th style="width:250px;">Descripcion</th>
                                 <th style="width:250px;">Tipo Gasto</th>
                                 <th style="width:150px;">Cantidad</th>
@@ -83,7 +83,7 @@
                                     </th>
                                     <th style="width:150px;">
                                         <div class="form-group">
-                                            {{$detail->cajas}}
+                                            {{number_format($detail->cajas,0)}}
                                         </div>
                                     </th>
                                     <th style="width:150px;">

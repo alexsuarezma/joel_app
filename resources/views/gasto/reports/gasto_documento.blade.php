@@ -56,7 +56,7 @@
                 <th>No.</th>
                 <th>Hectarea</th>
                 <th>Descripcion Hectarea</th>
-                <th>Producto</th>
+                <th>Id Producto</th>
                 <th>Descripcion</th>
                 <th>Tipo Gasto</th>
                 <th>Cantidad</th>
@@ -79,7 +79,7 @@
                     <th>{{$detail->producto->descripcion}}</th>
                     <th>{{$detail->producto->tipoGasto->descripcion}}</th>
                     <th>{{$detail->cantidad}}</th>
-                    <th>{{$detail->hectareas_aplicado}}</th>
+                    <th>{{number_format($detail->hectareas_aplicado,0)}}</th>
                     <th>{{$detail->costo}}</th>
                     <th>{{$detail->unidad_medida}}</th>
                     <th>{{$detail->factor}}</th>

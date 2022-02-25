@@ -38,14 +38,16 @@ class GastoController extends Controller
         try {
 
             DB::beginTransaction();
-
-            // if(date('Y', strtotime($request->input('fecha_documento'))) != date('Y', strtotime(\Carbon\Carbon::now()))){
-            //     throw new \Exception('Solo se puede registrar documentos con el año actual', 1);
-            // }
-            // if(date('m', strtotime($request->input('fecha_documento'))) != date('m', strtotime(\Carbon\Carbon::now()))){
-            //     throw new \Exception('Solo se puede registrar documentos con el mes actual', 1);
-            // }
-
+            
+            if(!\Auth::user()->can('registro.sin.restriccion.fecha') ){
+                if(date('Y', strtotime($request->input('fecha_documento'))) != date('Y', strtotime(\Carbon\Carbon::now()))){
+                    throw new \Exception('Solo se puede registrar documentos con el año actual', 1);
+                }
+                if(date('m', strtotime($request->input('fecha_documento'))) != date('m', strtotime(\Carbon\Carbon::now()))){
+                    throw new \Exception('Solo se puede registrar documentos con el mes actual', 1);
+                }
+            }
+            
             $gasto = new Gasto();
             $totalDocumento = 0;
 

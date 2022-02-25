@@ -55,7 +55,7 @@
                                 <th>No.</th>
                                 <th style="width:100px;">Hectarea</th>
                                 <th style="width:100px;">Descripcion Hectarea</th>
-                                <th>Producto</th>
+                                <th>Id Producto</th>
                                 <th style="width:250px;">Descripcion</th>
                                 <th style="width:250px;">Tipo Gasto</th>
                                 <th style="width:150px;">Cantidad</th>
@@ -108,7 +108,7 @@
                                     </th>
                                     <th style="width:150px;">
                                         <div class="form-group">
-                                            {{$detail->hectareas_aplicado}}
+                                            {{number_format($detail->hectareas_aplicado, 0)}}
                                         </div>
                                     </th>
                                     <th style="width:150px;">

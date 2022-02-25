@@ -68,7 +68,7 @@
             <tr>
                 <th>No.</th>
                 <!-- <th style="width:100px;">Sector</th> -->
-                <th>Producto</th>
+                <th>Id Producto</th>
                 <th style="width:250px;">Descripcion</th>
                 <th style="width:150px;">Cantidad</th>
                 <th style="width:150px;">Hect. Apli.</th>
@@ -116,8 +116,8 @@
                     </th>
                     <th style="width:150px;">
                         <div class="form-group">
-                            {{$detail['hectareas_aplicado']}}
-                            <input type="hidden" name="hectareas_aplicado[]" value="{{$detail['hectareas_aplicado']}}" readonly required>
+                            {{number_format($detail['hectareas_aplicado'],0)}}
+                            <input type="hidden" name="hectareas_aplicado[]" value="{{number_format($detail['hectareas_aplicado'],0)}}" readonly required>
                         </div>
                     </th>
                     <th style="width:150px;">

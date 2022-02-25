@@ -58,7 +58,7 @@ class HomeController extends Controller
 
         //$gastos_produccion =  DB::table('vw_gastos_produccion')->where('anio', date('Y',strtotime(\Carbon\Carbon::now())))->get();
 
-        $productos = Producto::select('id','stock','descripcion','unidad_medida')->where('tipo_producto', '2')->get();
+        $productos = Producto::select('id','stock','descripcion','unidad_medida','factor')->where('tipo_producto', '2')->get();
 
         // $datos_gastos = array();
         // $datos_ventas = array();

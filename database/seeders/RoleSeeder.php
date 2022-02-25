@@ -88,5 +88,6 @@ class RoleSeeder extends Seeder
         Permission::create([ 'name' => 'empleado.editar.avanzado' ])->assignRole($admin);
         Permission::create([ 'name' => 'empleado.eliminar' ])->assignRole($admin);
         
+        Permission::create([ 'name' => 'registro.sin.restriccion.fecha' ])->assignRole($admin);
     }
 }

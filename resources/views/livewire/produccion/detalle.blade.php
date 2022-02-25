@@ -71,7 +71,7 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Producto</th>
+                <th>Id Producto</th>
                 <th style="width:250px;">Descripcion</th>
                 <th style="width:150px;">Cantidad</th>
                 <th style="width:150px;">Cajas</th>
@@ -111,8 +111,8 @@
                     </th>
                     <th style="width:150px;">
                         <div class="form-group">
-                            {{$detail['cajas']}}
-                            <input type="hidden" name="cajas[]" value="{{$detail['cajas']}}" readonly required>
+                            {{number_format($detail['cajas'],0)}}
+                            <input type="hidden" name="cajas[]" value="{{number_format($detail['cajas'],0)}}" readonly required>
                         </div>
                     </th>
                     <th style="width:150px;">
@@ -186,6 +186,9 @@
                                     <tr style="cursor:pointer;" wire:click.prevent="selectedProducto({{$product}})" data-bs-dismiss="modal">
                                         <td>{{$product->id}}</td>
                                         <td>{{$product->descripcion}}</td>
+                                        <td>Stock: {{$product->stock}} {{$product->unidad_medida}}; 
+                                            {{number_format(($product->stock > 0 ? ($product->stock / $product->factor) : $product->stock),0) }} cajas
+                                        </td>
                                     </tr>
                                 @empty
                                     <div class="d-flex align-items-center justify-content-center pt-3">
