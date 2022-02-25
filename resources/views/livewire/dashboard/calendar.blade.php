@@ -30,7 +30,8 @@
                             @if($detail->dualidad_mes == 'ene_feb' && $detail->month == 1)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
-                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb
+                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb </br>
+                                    | P.L. {{$detail->p_local}}caj. | P.E. {{$detail->p_exportacion}}caj.
                                 </div>
                                 {{$detail->nombre_lote}}
                                 </div>
@@ -44,7 +45,8 @@
                             @if($detail->dualidad_mes == 'ene_feb' && $detail->month == 2)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
-                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb
+                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
+                                    | P.L. {{$detail->p_local}}caj. | P.E. {{$detail->p_exportacion}}caj.
                                 </div>
                                 {{$detail->nombre_lote}}
                                 </div>
@@ -58,7 +60,8 @@
                             @if($detail->dualidad_mes == 'mar_abr' && $detail->month == 3)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
-                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb
+                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
+                                    | P.L. {{$detail->p_local}}caj. | P.E. {{$detail->p_exportacion}}caj.
                                 </div>
                                 {{$detail->nombre_lote}}
                                 </div>
@@ -72,7 +75,8 @@
                             @if($detail->dualidad_mes == 'mar_abr' && $detail->month == 4)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
-                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb
+                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
+                                    | P.L. {{$detail->p_local}}caj. | P.E. {{$detail->p_exportacion}}caj.
                                 </div>
                                 {{$detail->nombre_lote}}
                                 </div>
@@ -86,7 +90,8 @@
                             @if($detail->dualidad_mes == 'may_jun' && $detail->month == 5)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
-                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb
+                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
+                                    | P.L. {{$detail->p_local}}caj. | P.E. {{$detail->p_exportacion}}caj.
                                 </div>
                                 {{$detail->nombre_lote}}
                                 </div>
@@ -100,7 +105,8 @@
                             @if($detail->dualidad_mes == 'may_jun' && $detail->month == 6)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
-                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb
+                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
+                                    | P.L. {{$detail->p_local}}caj. | P.E. {{$detail->p_exportacion}}caj.
                                 </div>
                                 {{$detail->nombre_lote}}
                                 </div>
@@ -114,7 +120,8 @@
                             @if($detail->dualidad_mes == 'jul_ago' && $detail->month == 7)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
-                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb
+                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
+                                    | P.L. {{$detail->p_local}}caj. | P.E. {{$detail->p_exportacion}}caj.
                                 </div>
                                 {{$detail->nombre_lote}}
                                 </div>
@@ -128,7 +135,8 @@
                             @if($detail->dualidad_mes == 'jul_ago' && $detail->month == 8)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
-                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb
+                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
+                                    | P.L. {{$detail->p_local}}caj. | P.E. {{$detail->p_exportacion}}caj.
                                 </div>
                                 {{$detail->nombre_lote}}
                                 </div>
@@ -142,7 +150,8 @@
                             @if($detail->dualidad_mes == 'sep_oct' && $detail->month == 9)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
-                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb
+                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
+                                    | P.L. {{$detail->p_local}}caj. | P.E. {{$detail->p_exportacion}}caj.
                                 </div>
                                 {{$detail->nombre_lote}}
                                 </div>
@@ -156,7 +165,8 @@
                             @if($detail->dualidad_mes == 'sep_oct' && $detail->month == 10)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
-                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb
+                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
+                                    | P.L. {{$detail->p_local}}caj. | P.E. {{$detail->p_exportacion}}caj.
                                 </div>
                                 {{$detail->nombre_lote}}
                                 </div>
@@ -170,7 +180,8 @@
                             @if($detail->dualidad_mes == 'nov_dic' && $detail->month == 11)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
-                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb
+                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
+                                    | P.L. {{$detail->p_local}}caj. | P.E. {{$detail->p_exportacion}}caj.
                                 </div>
                                 {{$detail->nombre_lote}}
                                 </div>
@@ -184,7 +195,8 @@
                             @if($detail->dualidad_mes == 'nov_dic' && $detail->month == 12)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
-                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb
+                                    G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
+                                    | P.L. {{$detail->p_local}}caj. | P.E. {{$detail->p_exportacion}}caj.
                                 </div>
                                 {{$detail->nombre_lote}}
                                 </div>
