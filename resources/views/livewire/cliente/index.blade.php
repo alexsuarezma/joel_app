@@ -16,6 +16,7 @@
             <div class="form-group">
                 <!-- <label>Custom Select</label> -->
                 <select class="custom-select" wire:model="status">
+                    <option value="0">Todos</option>
                     <option value="1">Local</option>
                     <option value="2">Exterior</option>
                 </select>

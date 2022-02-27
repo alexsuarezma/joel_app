@@ -54,7 +54,6 @@
           <thead>
             <tr>
                 <th>No.</th>
-                <th>Hectarea</th>
                 <th>Descripcion Hectarea</th>
                 <th>Id Producto</th>
                 <th>Descripcion</th>
@@ -73,7 +72,6 @@
                 <?php $cantidad += $detail->cantidad;?>
                 <tr>
                     <th>{{$detail->secuencia}}</th>
-                    <th>{{$detail->sector_lote_id}}</th>
                     <th>{{$detail->sectorLote->descripcion}}</th>
                     <th>{{$detail->producto_id}}</th>
                     <th>{{$detail->producto->descripcion}}</th>

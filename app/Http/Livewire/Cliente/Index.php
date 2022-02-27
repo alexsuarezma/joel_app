@@ -14,13 +14,17 @@ class Index extends Component
     protected $paginationTheme = 'bootstrap';
     public $search = '';
     public $filter = '';
-    public $status = 1;
+    public $status = 0;
 
     public function render()
     {
         return view('livewire.cliente.index',
             [
-            'clientes' => Cliente::where('tipo_cliente', $this->status)
+            'clientes' => Cliente::where( function($query) {
+                                if($this->status != 0){
+                                    $query->where('tipo_cliente', "{$this->status}");
+                                }
+                            })
                             ->where( function($query) {
                                 $query->where('nombres', 'LIKE', "%{$this->search}%")->orWhere('apellidos', 'LIKE', "%{$this->search}%")
                                 ->orWhere('cedula', 'LIKE', "%{$this->search}%")->orWhere('email', 'LIKE', "%{$this->search}%");

@@ -13,6 +13,7 @@ use App\Http\Controllers\VentaController;
 use App\Http\Controllers\EmpleadoController;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,6 +61,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/role/assign/', [RoleController::class, 'assignRoleToUser'])->name('role.assign.create')->middleware('permission:rol.asignar');
     Route::post('/role/revoke/', [RoleController::class, 'revokeRoleToUser'])->name('role.revoke.delete')->middleware('permission:rol.revocar');
     Route::delete('/role/delete/', [RoleController::class, 'delete'])->name('role.delete')->middleware('permission:rol.eliminar');
+
+    Route::get('/balance/final', [ReportesController::class, 'reporteBalanceFinal'])->name('reports.balance.general.get');//->middleware('permission:rol.editar.avanzado');
 });
 
 Route::middleware('auth')->prefix('cliente')->group(function () {

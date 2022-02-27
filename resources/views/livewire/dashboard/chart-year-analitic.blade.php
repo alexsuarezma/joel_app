@@ -21,67 +21,85 @@
     <!-- ./card-body -->
     <div class="card-footer">
         <div class="row">
-            <div class="col-sm-4 col-6">
-            <div class="description-block border-right">
-                <span class="description-percentage text-{{ $venta_total->venta > $gastos_total->gastos ? 'success' : ( $venta_total->venta == $gastos_total->gasto ? 'warning' : 'danger' ) }}">
-                <!-- <i class="fas fa-caret-up"></i> 17% -->
-                @if($venta_total->venta > $gastos_total->gastos)
-                    <i class="fas fa-caret-up"></i>
-                @elseif($venta_total->venta == $gastos_total->gastos)
-                    <i class="fas fa-caret-left"></i>
-                @else
-                    <i class="fas fa-caret-down"></i>
-                @endif
-                @if($gastos_total->gastos > 0) 
-                    {{ number_format(( $venta_total->venta / $gastos_total->gastos) * 100, 2) }}%
-                @else
-                    0% 
-                @endif
-                </span>
-                <h5 class="description-header">${{$venta_total->venta}}</h5>
-                <span class="description-text">TOTAL VENTA</span>
-            </div>
-            <!-- /.description-block -->
-            </div>
-            <!-- /.col -->
-            <div class="col-sm-4 col-6">
-            <div class="description-block border-right">
-                <span class="description-percentage text-{{ $gastos_total->gastos > $venta_total->venta  ? 'danger' : ( $venta_total->venta == $gastos_total->gasto ? 'warning' : 'success' ) }}">
-                <!-- <i class="fas fa-caret-left"></i> 0%-->
-                @if($gastos_total->gastos > $venta_total->venta)
-                    <i class="fas fa-caret-up"></i>
-                @elseif($venta_total->venta == $gastos_total->gastos)
-                    <i class="fas fa-caret-left"></i>
-                @else
-                    <i class="fas fa-caret-down"></i> 
-                @endif
-                
-                @if($gastos_total->gastos > 0) 
-                    {{ number_format(( ($gastos_total->gastos - $venta_total->venta) / $gastos_total->gastos ) * 100, 2) }}%
-                @else
-                    0% 
-                @endif 
-                </span> 
-                <h5 class="description-header">${{$gastos_total->gastos}}</h5>
-                <span class="description-text">TOTAL GASTOS</span>
-            </div>
-            <!-- /.description-block -->
+            <div class="col-sm-3 col-6">
+                <div class="description-block border-right">
+                    <span class="description-percentage text-{{ $venta_total->venta > $gastos_total->gastos ? 'success' : ( $venta_total->venta == $gastos_total->gasto ? 'warning' : 'danger' ) }}">
+                    <!-- <i class="fas fa-caret-up"></i> 17% -->
+                    @if($venta_total->venta > $gastos_total->gastos)
+                        <i class="fas fa-caret-up"></i>
+                    @elseif($venta_total->venta == $gastos_total->gastos)
+                        <i class="fas fa-caret-left"></i>
+                    @else
+                        <i class="fas fa-caret-down"></i>
+                    @endif
+                    @if($gastos_total->gastos > 0) 
+                        {{ number_format(( $venta_total->venta / $gastos_total->gastos) * 100, 2) }}%
+                    @else
+                        0% 
+                    @endif
+                    </span>
+                    <h5 class="description-header">${{$venta_total->venta}}</h5>
+                    <span class="description-text">TOTAL VENTA</span>
+                </div>
+                <!-- /.description-block -->
             </div>
             <!-- /.col -->
-            <div class="col-sm-4 col-6">
-            <div class="description-block border-right">
-                <span class="description-percentage text-{{ $produccion_total->produccion > 0  ? 'success' : 'warning' }}">
-                <!-- <i class="fas fa-caret-up"></i> 20% -->
-                @if($produccion_total->produccion > 0)
-                    <i class="fas fa-caret-up"></i>
-                @else
-                    <i class="fas fa-caret-left"></i>
-                @endif 
-                </span>
-                <h5 class="description-header">{{$produccion_total->produccion}} lb</h5>
-                <span class="description-text">TOTAL PRODUCCIÓN</span>
+            <div class="col-sm-3 col-6">
+                <div class="description-block border-right">
+                    <span class="description-percentage text-{{ $gastos_total->gastos > $venta_total->venta  ? 'danger' : ( $venta_total->venta == $gastos_total->gasto ? 'warning' : 'success' ) }}">
+                    <!-- <i class="fas fa-caret-left"></i> 0%-->
+                    @if($gastos_total->gastos > $venta_total->venta)
+                        <i class="fas fa-caret-up"></i>
+                    @elseif($venta_total->venta == $gastos_total->gastos)
+                        <i class="fas fa-caret-left"></i>
+                    @else
+                        <i class="fas fa-caret-down"></i> 
+                    @endif
+                    
+                    @if($gastos_total->gastos > 0) 
+                        {{ number_format(( ($gastos_total->gastos - $venta_total->venta) / $gastos_total->gastos ) * 100, 2) }}%
+                    @else
+                        0% 
+                    @endif 
+                    </span> 
+                    <h5 class="description-header">${{$gastos_total->gastos}}</h5>
+                    <span class="description-text">TOTAL GASTOS</span>
+                </div>
+                <!-- /.description-block -->
             </div>
-            <!-- /.description-block -->
+            <div class="col-sm-3 col-6">
+                <div class="description-block border-right">
+                    <?php $utilidad = $gastos_total->gastos > 0 ? number_format(( $venta_total->venta - $gastos_total->gastos), 2) : 0; ?>
+                    <span class="description-percentage text-{{ $utilidad > 0 ? 'success' : ( $utilidad == 0 ? 'warning' : 'danger' ) }}">
+                        <!-- <i class="fas fa-caret-up"></i> 17% -->
+                        @if($utilidad > 0)
+                            <i class="fas fa-caret-up"></i>
+                        @elseif($utilidad == 0)
+                            <i class="fas fa-caret-left"></i>
+                        @else
+                            <i class="fas fa-caret-down"></i>
+                        @endif
+                    </span>
+                    <h5 class="description-header">${{$utilidad}}</h5>
+                    <span class="description-text">UTILIDAD</span>
+                </div>
+                <!-- /.description-block -->
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-3 col-6">
+                <div class="description-block border-right">
+                    <span class="description-percentage text-{{ $produccion_total->produccion > 0  ? 'success' : 'warning' }}">
+                    <!-- <i class="fas fa-caret-up"></i> 20% -->
+                    @if($produccion_total->produccion > 0)
+                        <i class="fas fa-caret-up"></i>
+                    @else
+                        <i class="fas fa-caret-left"></i>
+                    @endif 
+                    </span>
+                    <h5 class="description-header">{{$produccion_total->produccion}} lb</h5>
+                    <span class="description-text">TOTAL PRODUCCIÓN</span>
+                </div>
+                <!-- /.description-block -->
             </div>
             <!-- /.col -->
             <!-- <div class="col-sm-3 col-6">

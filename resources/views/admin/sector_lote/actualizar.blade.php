@@ -5,6 +5,19 @@
     <div class="container">
         <!-- general form elements -->
         <x-toast-message></x-toast-message>
+        <div class="row mb-3 mt-3">
+            <div class="col-md-12">
+                @if($sector_lote->vigencia == 1)
+                    <form method="POST" action="{{ Route::is('sector.update') ? route('sector.update.vigencia.put') : route('lote.update.vigencia.put') }}" autocomplete="off" >
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="id" value="{{$sector_lote->id}}">
+                        <input type="hidden" name="vigencia" value="{{$sector_lote->vigencia == 1 ? 0 : 1}}">
+                        <button type="submit" class="btn btn-danger float-right">Eliminar</button>
+                    </form>
+                @endif
+            </div>
+        </div>
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Actualizar {{ Route::is('sector.update') ? 'Sector' : 'Lote' }}</h3>
@@ -60,15 +73,6 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary float-right">Actualizar</button>
-                    @if($sector_lote->vigencia == 1)
-                        <form method="POST" action="{{ Route::is('sector.update') ? route('sector.update.vigencia.put') : route('lote.update.vigencia.put') }}" autocomplete="off" >
-                            @csrf
-                            @method('PUT')
-                            <input type="hidden" name="id" value="{{$sector_lote->id}}">
-                            <input type="hidden" name="vigencia" value="{{$sector_lote->vigencia == 1 ? 0 : 1}}">
-                            <button type="submit" class="btn btn-danger float-right mr-4">Eliminar</button>
-                        </form>
-                    @endif
                 </div>
             </form>
         </div>

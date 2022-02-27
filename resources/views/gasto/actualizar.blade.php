@@ -53,7 +53,6 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th style="width:100px;">Hectarea</th>
                                 <th style="width:100px;">Descripcion Hectarea</th>
                                 <th>Id Producto</th>
                                 <th style="width:250px;">Descripcion</th>
@@ -74,11 +73,6 @@
                                     <th style="width:100px;">
                                         <div class="form-group">
                                             {{$detail->secuencia}}
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="form-group">
-                                            {{$detail->sector_lote_id}}
                                         </div>
                                     </th>
                                     <th>

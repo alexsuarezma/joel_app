@@ -23,7 +23,22 @@
         <div class="container p-4">
             <div class="row">
             @for($i=1; $i <= 12; $i++)
-                <div class="col-md-3 border d-flex flex-column justify-content-center align-items-center bg-success border border-warning rounded" style="border-radius: 25px; min-height:150px">
+                <div class="col-md-3 border d-flex flex-column justify-content-center align-items-center border border-warning rounded" 
+                    style="border-radius: 25px; color: white; font-weight: bold; min-height:150px; background-color:
+                    @if($i == 1 || $i == 2)
+                        #B27F00;
+                    @elseif($i == 3 || $i == 4)
+                        #228D00;
+                    @elseif($i == 5 || $i == 6)
+                        #00808D;
+                    @elseif($i == 7 || $i == 8)
+                        #003A8D;
+                    @elseif($i == 9 || $i == 10)
+                        #8D2600;
+                    @elseif($i == 11 || $i == 12)
+                        #5B0015;
+                    @endif
+                    ">
                     @switch($i)
                         @case(1)
                             @foreach($gastos_produccion as $detail)

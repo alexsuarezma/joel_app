@@ -537,7 +537,7 @@
                 @endif
             </ul>
           </li>
-          <li class="nav-header">PROCESOS</li>
+          <li class="nav-header">PROCESOS DETALLADOS</li>
           @if(\Auth::user()->can('gasto.crear') || \Auth::user()->can('gasto.index') || \Auth::user()->can('gasto.editar.avanzado') || \Auth::user()->can('gasto.eliminar'))
             <li class="nav-item {{ Route::is('gasto.create') || Route::is('gasto.index') || Route::is('gasto.update') ? 'menu-open' : '' }}">
               <a href="#" class="nav-link" style="{{ Route::is('gasto.create') || Route::is('gasto.index') || Route::is('gasto.update') ? 'color: white; background-color:#B5AD0E' : '' }}">
@@ -625,59 +625,24 @@
               </ul>
             </li>
           @endif
-          {{--
-          <li class="nav-item {{ Route::is('empleado.create') || Route::is('empleado.index') || Route::is('horario.index') || Route::is('horario.create') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
+          <li class="nav-header">REPROTES GENERALES</li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" style="">
+              <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                Empleados
-                <i class="fas fa-angle-left right"></i>
+                Reportes
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('empleado.create') }}" class="nav-link {{ Route::is('empleado.create') ? 'active' : '' }}">
+                <a href="{{ route('reports.balance.general.get') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Empleado</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('empleado.index') }}" class="nav-link {{ Route::is('empleado.index') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lista Empleados</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('horario.index') }}" class="nav-link {{ Route::is('horario.index') || Route::is('horario.create') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Horarios</p>
+                  <p>Balance Final</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item {{ Route::is('venta.create') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Ventas
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('venta.create') }}" class="nav-link {{ Route::is('venta.create') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Venta</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lista de ventas</p>
-                </a>
-              </li>
-            </ul>
-          </li> --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

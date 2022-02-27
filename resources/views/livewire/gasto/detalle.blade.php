@@ -67,7 +67,6 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <!-- <th style="width:100px;">Sector</th> -->
                 <th>Id Producto</th>
                 <th style="width:250px;">Descripcion</th>
                 <th style="width:150px;">Cantidad</th>
@@ -90,12 +89,6 @@
                             <input type="hidden" name="secuencia[]" value="{{$detail['secuencia']}}" readonly>
                         </div>
                     </th>
-                    {{--<th>
-                        <div class="form-group">
-                            {{$detail['sector_lote_id']}}
-                            <input type="hidden" name="sector_lote_id_detalle[]" value="{{$detail['sector_lote_id']}}" readonly required>
-                        </div>
-                    </th>--}}
                     <th style="width:500px;">
                         <div class="form-group">
                             {{$detail['producto_id']}}

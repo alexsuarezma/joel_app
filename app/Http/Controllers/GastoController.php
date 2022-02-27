@@ -57,7 +57,8 @@ class GastoController extends Controller
             $gasto->user_registro_id = \Auth::user()->id;
 
             $gasto->save();
-
+            
+            
             foreach ($request->input('producto_id') as $index => $product){
                 $detalle_gasto = new DetalleGasto();
                 
