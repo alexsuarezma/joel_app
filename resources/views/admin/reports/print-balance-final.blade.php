@@ -1,24 +1,36 @@
-<section class="content">
-    <!-- Default box -->
-    <div class="row mb-3">
-        <div class="col-md-12">
-            <a class="btn btn-info btn-sm float-right" href="{{ route('print.reports.balance.general.get', ['anio' => $anio] ) }}" target="_blank">
-                <i class="fas fa-print"></i> Imprimir documento
-            </a>
-        </div>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>Documento Balance Final</title>
+  <title>{{ config('app.name', 'Laravel') }}</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href=" {{ asset('/plugins/fontawesome-free/css/all.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('/dist/css/adminlte.min.css') }}">
+</head>
+<body>
+<div class="wrapper">
+  <!-- Main content -->
+  <section class="invoice">
+    <!-- title row -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <h2 class="page-header">
+          <i class="fas fa-globe"></i> Papaya Maradol.
+        </h2>
+      </div>
+      <!-- /.col -->
     </div>
+
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Balance final año {{$anio}}</h3>
-
-            <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                <i class="fas fa-times"></i>
-            </button>
-            </div>
         </div>
         <div class="card-body">
             <div class="row">
@@ -61,9 +73,7 @@
                     <div class="col-12">
                         <div class="div mt-2 mb-2">
                             <p class="text-center">
-                                <i class="fas fa-caret-left mr-2" style="cursor:pointer;" wire:click="sumLessYear('less')"></i>
-                                    <strong>{{ '1 Ene ,'.$anio.' - '.'31 Dic ,'.$anio }}</strong>
-                                <i class="fas fa-caret-right ml-2" style="cursor:pointer;" wire:click="sumLessYear('sum')"></i>
+                                <strong>{{ '1 Ene ,'.$anio.' - '.'31 Dic ,'.$anio }}</strong>
                             </p>
                         </div>
                         <div class="post">
@@ -181,29 +191,20 @@
                     </p>
                 </div>
                 <ul class="list-unstyled">
-                    <!-- <li>
-                        <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Functional-requirements.docx</a>
-                    </li>
-                    <li>
-                        <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-pdf"></i> UAT.pdf</a>
-                    </li>
-                    <li>
-                        <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-envelope"></i> Email-from-flatbal.mln</a>
-                    </li>
-                    <li>
-                        <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-image "></i> Logo.png</a>
-                    </li>
-                    <li>
-                        <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Contract-10_12_2014.docx</a>
-                    </li> -->
+                   
                 </ul>
-                <!-- <div class="text-center mt-5 mb-3">
-                    <a href="#" class="btn btn-sm btn-primary">Add files</a>
-                    <a href="#" class="btn btn-sm btn-warning">Report contact</a>
-                </div> -->
             </div>
             </div>
         </div>
     <!-- /.card-body -->
     </div>
-</section>
+  </section>
+  <!-- /.content -->
+</div>
+<!-- ./wrapper -->
+<!-- Page specific script -->
+<script>
+  window.addEventListener("load", window.print());
+</script>
+</body>
+</html>

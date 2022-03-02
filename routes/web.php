@@ -63,6 +63,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::delete('/role/delete/', [RoleController::class, 'delete'])->name('role.delete')->middleware('permission:rol.eliminar');
 
     Route::get('/balance/final', [ReportesController::class, 'reporteBalanceFinal'])->name('reports.balance.general.get');//->middleware('permission:rol.editar.avanzado');
+    Route::get('/print/balance/final/{anio}', [ReportesController::class, 'printReporteBalanceFinal'])->name('print.reports.balance.general.get');
 });
 
 Route::middleware('auth')->prefix('cliente')->group(function () {
