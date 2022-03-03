@@ -50,15 +50,21 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Dualidad Mes</label>
+                            <label>Mes Afecta</label>
                             <select class="form-control" name="dualidad_mes" required>
                                 <option selected></option>
-                                <option value="ene_feb" {{ $sector_lote->dualidad_mes == 'ene_feb' ? 'selected' : '' }}>Enero-Febrero</option>
-                                <option value="mar_abr" {{ $sector_lote->dualidad_mes == 'mar_abr' ? 'selected' : '' }}>Marzo-Abril</option>
-                                <option value="may_jun" {{ $sector_lote->dualidad_mes == 'may_jun' ? 'selected' : '' }}>Mayo-Junio</option>
-                                <option value="jul_ago" {{ $sector_lote->dualidad_mes == 'jul_ago' ? 'selected' : '' }}>Julio-Agosto</option>
-                                <option value="sep_oct" {{ $sector_lote->dualidad_mes == 'sep_oct' ? 'selected' : '' }}>Septiembre-Octubre</option>
-                                <option value="nov_dic" {{ $sector_lote->dualidad_mes == 'nov_dic' ? 'selected' : '' }}>Noviembre-Diciembre</option>
+                                <option value="Enero" {{ $sector_lote->dualidad_mes == 'Enero' ? 'selected' : '' }}>Enero</option>
+                                <option value="Febrero" {{ $sector_lote->dualidad_mes == 'Febrero' ? 'selected' : '' }}>Febrero</option>
+                                <option value="Marzo" {{ $sector_lote->dualidad_mes == 'Marzo' ? 'selected' : '' }}>Marzo</option>
+                                <option value="Abril" {{ $sector_lote->dualidad_mes == 'Abril' ? 'selected' : '' }}>Abril</option>
+                                <option value="Mayo" {{ $sector_lote->dualidad_mes == 'Mayo' ? 'selected' : '' }}>Mayo</option>
+                                <option value="Junio" {{ $sector_lote->dualidad_mes == 'Junio' ? 'selected' : '' }}>Junio</option>
+                                <option value="Julio" {{ $sector_lote->dualidad_mes == 'Julio' ? 'selected' : '' }}>Julio</option>
+                                <option value="Agosto" {{ $sector_lote->dualidad_mes == 'Agosto' ? 'selected' : '' }}>Agosto</option>
+                                <option value="Septiembre" {{ $sector_lote->dualidad_mes == 'Septiembre' ? 'selected' : '' }}>Septiembre</option>
+                                <option value="Octubre" {{ $sector_lote->dualidad_mes == 'Octubre' ? 'selected' : '' }}>Octubre</option>
+                                <option value="Noviembre" {{ $sector_lote->dualidad_mes == 'Noviembre' ? 'selected' : '' }}>Noviembre</option>
+                                <option value="Diciembre" {{ $sector_lote->dualidad_mes == 'Diciembre' ? 'selected' : '' }}>Diciembre</option>
                             </select>
                         </div>
                     @endif

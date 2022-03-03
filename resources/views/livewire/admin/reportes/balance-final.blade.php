@@ -73,6 +73,7 @@
                                         <th>Ventas</th>
                                         <th>Gastos</th>
                                         <th>Producción</th>
+                                        <th>Hectarea</th>
                                         <th>Mes</th>
                                         <th>Año</th>
                                     </tr>
@@ -83,6 +84,7 @@
                                             <th>${{$detail->ventas}}</th>
                                             <th>${{$detail->gastos}}</th>
                                             <th>{{$detail->produccion}}</th>
+                                            <th>{{$detail->nombre_lote}}</th>
                                             <th>
                                                 @if($detail->month == 1)
                                                     Enero

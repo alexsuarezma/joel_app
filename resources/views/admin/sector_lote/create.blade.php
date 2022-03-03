@@ -35,15 +35,21 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Dualidad Mes</label>
+                            <label>Mes Afecta</label>
                             <select class="form-control" name="dualidad_mes" required>
                                 <option selected></option>
-                                <option value="ene_feb" {{ old('dualidad_mes') == 'ene_feb' ? 'selected' : '' }}>Enero-Febrero</option>
-                                <option value="mar_abr" {{ old('dualidad_mes') == 'mar_abr' ? 'selected' : '' }}>Marzo-Abril</option>
-                                <option value="may_jun" {{ old('dualidad_mes') == 'may_jun' ? 'selected' : '' }}>Mayo-Junio</option>
-                                <option value="jul_ago" {{ old('dualidad_mes') == 'jul_ago' ? 'selected' : '' }}>Julio-Agosto</option>
-                                <option value="sep_oct" {{ old('dualidad_mes') == 'sep_oct' ? 'selected' : '' }}>Septiembre-Octubre</option>
-                                <option value="nov_dic" {{ old('dualidad_mes') == 'nov_dic' ? 'selected' : '' }}>Noviembre-Diciembre</option>
+                                <option value="Enero" {{ old('dualidad_mes') == 'Enero' ? 'selected' : '' }}>Enero</option>
+                                <option value="Febrero" {{ old('dualidad_mes') == 'Febrero' ? 'selected' : '' }}>Febrero</option>
+                                <option value="Marzo" {{ old('dualidad_mes') == 'Marzo' ? 'selected' : '' }}>Marzo</option>
+                                <option value="Abril" {{ old('dualidad_mes') == 'Abril' ? 'selected' : '' }}>Abril</option>
+                                <option value="Mayo" {{ old('dualidad_mes') == 'Mayo' ? 'selected' : '' }}>Mayo</option>
+                                <option value="Junio" {{ old('dualidad_mes') == 'Junio' ? 'selected' : '' }}>Junio</option>
+                                <option value="Julio" {{ old('dualidad_mes') == 'Julio' ? 'selected' : '' }}>Julio</option>
+                                <option value="Agosto" {{ old('dualidad_mes') == 'Agosto' ? 'selected' : '' }}>Agosto</option>
+                                <option value="Septiembre" {{ old('dualidad_mes') == 'Septiembre' ? 'selected' : '' }}>Septiembre</option>
+                                <option value="Octubre" {{ old('dualidad_mes') == 'Octubre' ? 'selected' : '' }}>Octubre</option>
+                                <option value="Noviembre" {{ old('dualidad_mes') == 'Noviembre' ? 'selected' : '' }}>Noviembre</option>
+                                <option value="Diciembre" {{ old('dualidad_mes') == 'Diciembre' ? 'selected' : '' }}>Diciembre</option>
                             </select>
                         </div>
                     @endif

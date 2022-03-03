@@ -35,7 +35,7 @@ class BalanceFinal extends Component
                     ->where('anulado', 0)
                     ->whereYear('fecha_documento', $this->anio)
                     ->first(),
-            'gastos_ventas_produccion' => DB::table('vw_gastos_ventas')->where('anio', $this->anio)->get(),
+            'gastos_ventas_produccion' => DB::table('vw_balance_final')->where('anio', $this->anio)->get(),
             'ventas_promedio' => Venta::select(DB::raw("ifnull(sum(ventas.total_venta),0) as ventas, avg(detalle_ventas.precio_unitario) precio_promedio, ventas.tipo_venta"))
                                     ->join("detalle_ventas", "ventas.id", '=', 'detalle_ventas.venta_id', 'left outer')
                                     ->where('ventas.anulado', 0)

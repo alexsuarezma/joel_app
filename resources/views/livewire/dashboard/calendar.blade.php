@@ -25,24 +25,12 @@
             @for($i=1; $i <= 12; $i++)
                 <div class="col-md-3 border d-flex flex-column justify-content-center align-items-center border border-warning rounded" 
                     style="border-radius: 25px; color: white; font-weight: bold; min-height:150px; background-color:
-                    @if($i == 1 || $i == 2)
-                        #B27F00;
-                    @elseif($i == 3 || $i == 4)
-                        #228D00;
-                    @elseif($i == 5 || $i == 6)
-                        #00808D;
-                    @elseif($i == 7 || $i == 8)
-                        #003A8D;
-                    @elseif($i == 9 || $i == 10)
-                        #8D2600;
-                    @elseif($i == 11 || $i == 12)
-                        #5B0015;
-                    @endif
-                    ">
+                    @if($i == 1 || $i == 2) #B27F00; @elseif($i == 3 || $i == 4) #228D00; @elseif($i == 5 || $i == 6) #00808D;
+                    @elseif($i == 7 || $i == 8) #003A8D; @elseif($i == 9 || $i == 10) #8D2600; @elseif($i == 11 || $i == 12) #5B0015; @endif">
                     @switch($i)
                         @case(1)
                             @foreach($gastos_produccion as $detail)
-                            @if($detail->dualidad_mes == 'ene_feb' && $detail->month == 1)
+                            @if($detail->month == 1)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
                                     G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb </br>
@@ -57,7 +45,7 @@
                             @break
                         @case(2)
                             @foreach($gastos_produccion as $detail)
-                            @if($detail->dualidad_mes == 'ene_feb' && $detail->month == 2)
+                            @if($detail->month == 2)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
                                     G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
@@ -72,7 +60,7 @@
                             @break
                         @case(3)
                             @foreach($gastos_produccion as $detail)
-                            @if($detail->dualidad_mes == 'mar_abr' && $detail->month == 3)
+                            @if($detail->month == 3)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
                                     G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
@@ -87,7 +75,7 @@
                             @break
                         @case(4)
                             @foreach($gastos_produccion as $detail)
-                            @if($detail->dualidad_mes == 'mar_abr' && $detail->month == 4)
+                            @if($detail->month == 4)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
                                     G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
@@ -102,7 +90,7 @@
                             @break
                         @case(5)
                             @foreach($gastos_produccion as $detail)
-                            @if($detail->dualidad_mes == 'may_jun' && $detail->month == 5)
+                            @if($detail->month == 5)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
                                     G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
@@ -117,7 +105,7 @@
                             @break
                         @case(6)
                             @foreach($gastos_produccion as $detail)
-                            @if($detail->dualidad_mes == 'may_jun' && $detail->month == 6)
+                            @if($detail->month == 6)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
                                     G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
@@ -132,7 +120,7 @@
                             @break
                         @case(7)
                             @foreach($gastos_produccion as $detail)
-                            @if($detail->dualidad_mes == 'jul_ago' && $detail->month == 7)
+                            @if($detail->month == 7)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
                                     G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
@@ -147,7 +135,7 @@
                             @break
                         @case(8)
                             @foreach($gastos_produccion as $detail)
-                            @if($detail->dualidad_mes == 'jul_ago' && $detail->month == 8)
+                            @if($detail->month == 8)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
                                     G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
@@ -162,7 +150,7 @@
                             @break
                         @case(9)
                             @foreach($gastos_produccion as $detail)
-                            @if($detail->dualidad_mes == 'sep_oct' && $detail->month == 9)
+                            @if($detail->month == 9)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
                                     G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
@@ -177,7 +165,7 @@
                             @break
                         @case(10)
                             @foreach($gastos_produccion as $detail)
-                            @if($detail->dualidad_mes == 'sep_oct' && $detail->month == 10)
+                            @if($detail->month == 10)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
                                     G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
@@ -192,7 +180,7 @@
                             @break
                         @case(11)
                             @foreach($gastos_produccion as $detail)
-                            @if($detail->dualidad_mes == 'nov_dic' && $detail->month == 11)
+                            @if($detail->month == 11)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
                                     G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
@@ -207,7 +195,7 @@
                             @break
                         @case(12)
                             @foreach($gastos_produccion as $detail)
-                            @if($detail->dualidad_mes == 'nov_dic' && $detail->month == 12)
+                            @if($detail->month == 12)
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                 <div>
                                     G. ${{$detail->gastos}} | P. {{$detail->produccion}}lb</br>
