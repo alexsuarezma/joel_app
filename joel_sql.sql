@@ -1,5 +1,3 @@
-SELECT * FROM productos;
-
 create table clientes(
 	id int(255) NOT NULL AUTO_INCREMENT,
     cedula varchar(13),
@@ -181,271 +179,540 @@ create table detalle_ventas(
 	CONSTRAINT fk_detalle_ventas_productos FOREIGN KEY (producto_id) REFERENCES productos (id),
     CONSTRAINT fk_detalle_ventas_gastos FOREIGN KEY (venta_id) REFERENCES ventas (id)
 );
+drop table anios
+create table anios(anio decimal);
+insert into anios values(2015);
+insert into anios values(2016);
+insert into anios values(2017);
+insert into anios values(2018);
+insert into anios values(2019);
+insert into anios values(2020);
+insert into anios values(2021);
+insert into anios values(2022);
+insert into anios values(2023);
+insert into anios values(2024);
+insert into anios values(2025);
 
-
-create view vw_gastos_ventas as
-	select sum(gastos) gastos, sum(ventas) ventas, month, fecha_documento, anio from(   
-        select ifnull(sum(total_gasto),0) as gastos, 0 ventas,1 month, year(curtime()) anio,fecha_documento from gastos where month(fecha_documento) = 1 and anulado = 0
-        union all 
-        select 0 gastos,ifnull(sum(total_venta),0) as ventas,1 month, year(curtime()) anio,fecha_documento from ventas where month(fecha_documento) = 1 and anulado = 0
-    ) tmp #ENERO
+alter view vw_gastos_ventas as
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio from(   
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,1 month, year(fecha_documento) anio,fecha_documento from gastos where month(fecha_documento) = 1 and anulado = 0
+    group by fecha_documento
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,1 month, year(fecha_documento) anio,fecha_documento from ventas where month(fecha_documento) = 1 and anulado = 0
+    group by fecha_documento
     union all
-    select sum(gastos) gastos, sum(ventas) ventas, month, fecha_documento, anio from(
-        select ifnull(sum(total_gasto),0) as gastos, 0 ventas,2 month, year(curtime()) anio,fecha_documento from gastos where month(fecha_documento) = 2 and anulado = 0
-        union all 
-        select 0 gastos,ifnull(sum(total_venta),0) as ventas,2 month, year(curtime()) anio,fecha_documento from ventas where month(fecha_documento) = 2 and anulado = 0
-    ) tmp #FEBRERO
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,1 month, year(fecha_documento) anio,fecha_documento from produccion where month(fecha_documento) = 1 and anulado = 0
+        group by fecha_documento
     union all
-    select sum(gastos) gastos, sum(ventas) ventas, month, fecha_documento, anio from(
-        select ifnull(sum(total_gasto),0) as gastos, 0 ventas,3 month, year(curtime()) anio,fecha_documento from gastos where month(fecha_documento) = 3 and anulado = 0
-        union all 
-        select 0 gastos,ifnull(sum(total_venta),0) as ventas,3 month, year(curtime()) anio,fecha_documento from ventas where month(fecha_documento) = 3 and anulado = 0
-    ) tmp #MARZO
+    select 0,0,0,1, anio, curtime() from anios
+) tmp  group by anio #ENERO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,2 month, year(fecha_documento) anio,fecha_documento from gastos where month(fecha_documento) = 2 and anulado = 0
+    group by fecha_documento
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,2 month, year(fecha_documento) anio,fecha_documento from ventas where month(fecha_documento) = 2 and anulado = 0
+    group by fecha_documento
     union all
-    select sum(gastos) gastos, sum(ventas) ventas, month, fecha_documento, anio from(
-        select ifnull(sum(total_gasto),0) as gastos, 0 ventas,4 month, year(curtime()) anio,fecha_documento from gastos where month(fecha_documento) = 4 and anulado = 0
-        union all 
-        select 0 gastos,ifnull(sum(total_venta),0) as ventas,4 month, year(curtime()) anio,fecha_documento from ventas where month(fecha_documento) = 4 and anulado = 0
-    ) tmp #ABRIL
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,2 month, year(fecha_documento) anio,fecha_documento from produccion where month(fecha_documento) = 2 and anulado = 0
+        group by fecha_documento
     union all
-    select sum(gastos) gastos, sum(ventas) ventas, month, fecha_documento, anio from(
-        select ifnull(sum(total_gasto),0) as gastos, 0 ventas,5 month, year(curtime()) anio,fecha_documento from gastos where month(fecha_documento) = 5 and anulado = 0
-        union all 
-        select 0 gastos,ifnull(sum(total_venta),0) as ventas,5 month, year(curtime()) anio,fecha_documento from ventas where month(fecha_documento) = 5 and anulado = 0
-    ) tmp #MAYO
+    select 0,0,0,2, anio, curtime() from anios
+) tmp group by anio #FEBRERO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,3 month, year(fecha_documento) anio,fecha_documento from gastos where month(fecha_documento) = 3 and anulado = 0
+    group by fecha_documento
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,3 month, year(fecha_documento) anio,fecha_documento from ventas where month(fecha_documento) = 3 and anulado = 0
+    group by fecha_documento
     union all
-    select sum(gastos) gastos, sum(ventas) ventas, month, fecha_documento, anio from(
-        select ifnull(sum(total_gasto),0) as gastos, 0 ventas,6 month, year(curtime()) anio,fecha_documento from gastos where month(fecha_documento) = 6 and anulado = 0
-        union all 
-        select 0 gastos,ifnull(sum(total_venta),0) as ventas,6 month, year(curtime()) anio,fecha_documento from ventas where month(fecha_documento) = 6 and anulado = 0
-    ) tmp #JUNIO
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,3 month, year(fecha_documento) anio,fecha_documento from produccion where month(fecha_documento) = 3 and anulado = 0
+        group by fecha_documento
     union all
-    select sum(gastos) gastos, sum(ventas) ventas, month, fecha_documento, anio from(
-        select ifnull(sum(total_gasto),0) as gastos, 0 ventas,7 month, year(curtime()) anio,fecha_documento from gastos where month(fecha_documento) = 7 and anulado = 0
-        union all 
-        select 0 gastos,ifnull(sum(total_venta),0) as ventas,7 month, year(curtime()) anio,fecha_documento from ventas where month(fecha_documento) = 7 and anulado = 0
-    ) tmp #JULIO
+    select 0,0,0,3, anio, curtime() from anios
+) tmp group by anio #MARZO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,4 month, year(fecha_documento) anio,fecha_documento from gastos where month(fecha_documento) = 4 and anulado = 0
+    group by fecha_documento
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,4 month, year(fecha_documento) anio,fecha_documento from ventas where month(fecha_documento) = 4 and anulado = 0
+    group by fecha_documento
     union all
-    select sum(gastos) gastos, sum(ventas) ventas, month, fecha_documento, anio from(
-        select ifnull(sum(total_gasto),0) as gastos, 0 ventas,8 month, year(curtime()) anio,fecha_documento from gastos where month(fecha_documento) = 8 and anulado = 0
-        union all 
-        select 0 gastos,ifnull(sum(total_venta),0) as ventas,8 month, year(curtime()) anio,fecha_documento from ventas where month(fecha_documento) = 8 and anulado = 0
-    ) tmp #AGOSTO
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,4 month, year(fecha_documento) anio,fecha_documento from produccion where month(fecha_documento) = 4 and anulado = 0
+        group by fecha_documento
     union all
-    select sum(gastos) gastos, sum(ventas) ventas, month, fecha_documento, anio from(
-        select ifnull(sum(total_gasto),0) as gastos, 0 ventas,9 month, year(curtime()) anio,fecha_documento from gastos where month(fecha_documento) = 9 and anulado = 0
-        union all 
-        select 0 gastos,ifnull(sum(total_venta),0) as ventas,9 month, year(curtime()) anio,fecha_documento from ventas where month(fecha_documento) = 9 and anulado = 0
-    ) tmp #SEPTIEMBRE
+    select 0,0,0,4, anio, curtime() from anios
+) tmp group by anio #ABRIL
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,5 month, year(fecha_documento) anio,fecha_documento from gastos where month(fecha_documento) = 5 and anulado = 0
+    group by fecha_documento
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,5 month, year(fecha_documento) anio,fecha_documento from ventas where month(fecha_documento) = 5 and anulado = 0
+    group by fecha_documento
     union all
-    select sum(gastos) gastos, sum(ventas) ventas, month, fecha_documento, anio from(
-        select ifnull(sum(total_gasto),0) as gastos, 0 ventas,10 month, year(curtime()) anio,fecha_documento from gastos where month(fecha_documento) = 10 and anulado = 0
-        union all 
-        select 0 gastos,ifnull(sum(total_venta),0) as ventas,10 month, year(curtime()) anio,fecha_documento from ventas where month(fecha_documento) = 10 and anulado = 0
-    ) tmp #OCTUBRE
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,5 month, year(fecha_documento) anio,fecha_documento from produccion where month(fecha_documento) = 5 and anulado = 0
+        group by fecha_documento
     union all
-    select sum(gastos) gastos, sum(ventas) ventas, month, fecha_documento, anio from(
-        select ifnull(sum(total_gasto),0) as gastos, 0 ventas,11 month, year(curtime()) anio,fecha_documento from gastos where month(fecha_documento) = 11 and anulado = 0
-        union all 
-        select 0 gastos,ifnull(sum(total_venta),0) as ventas,11 month, year(curtime()) anio,fecha_documento from ventas where month(fecha_documento) = 11 and anulado = 0
-    ) tmp #NOVIEMBRE
+    select 0,0,0,5, anio, curtime() from anios
+) tmp group by anio #MAYO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,6 month, year(fecha_documento) anio,fecha_documento from gastos where month(fecha_documento) = 6 and anulado = 0
+    group by fecha_documento
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,6 month, year(fecha_documento) anio,fecha_documento from ventas where month(fecha_documento) = 6 and anulado = 0
+    group by fecha_documento
     union all
-    select sum(gastos) gastos, sum(ventas) ventas, month, fecha_documento, anio from(
-        select ifnull(sum(total_gasto),0) as gastos, 0 ventas,12 month, year(curtime()) anio,fecha_documento from gastos where month(fecha_documento) = 12 and anulado = 0
-        union all 
-        select 0 gastos,ifnull(sum(total_venta),0) as ventas,12 month, year(curtime()) anio,fecha_documento from ventas where month(fecha_documento) = 12 and anulado = 0
-    ) tmp #DICIEMBRE
-
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,6 month, year(fecha_documento) anio,fecha_documento from produccion where month(fecha_documento) = 6 and anulado = 0
+        group by fecha_documento
+    union all
+    select 0,0,0,6, anio, curtime() from anios
+) tmp group by anio #JUNIO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,7 month, year(fecha_documento) anio,fecha_documento from gastos where month(fecha_documento) = 7 and anulado = 0
+    group by fecha_documento
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,7 month, year(fecha_documento) anio,fecha_documento from ventas where month(fecha_documento) = 7 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,7 month, year(fecha_documento) anio,fecha_documento from produccion where month(fecha_documento) = 7 and anulado = 0
+        group by fecha_documento
+    union all
+    select 0,0,0,7, anio, curtime() from anios
+) tmp group by anio #JULIO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,8 month, year(fecha_documento) anio,fecha_documento from gastos where month(fecha_documento) = 8 and anulado = 0
+    group by fecha_documento
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,8 month, year(fecha_documento) anio,fecha_documento from ventas where month(fecha_documento) = 8 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,8 month, year(fecha_documento) anio,fecha_documento from produccion where month(fecha_documento) = 8 and anulado = 0
+        group by fecha_documento
+    union all
+    select 0,0,0,8, anio, curtime() from anios
+) tmp group by anio #AGOSTO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,9 month, year(fecha_documento) anio,fecha_documento from gastos where month(fecha_documento) = 9 and anulado = 0
+    group by fecha_documento
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,9 month, year(fecha_documento) anio,fecha_documento from ventas where month(fecha_documento) = 9 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,9 month, year(fecha_documento) anio,fecha_documento from produccion where month(fecha_documento) = 9 and anulado = 0
+        group by fecha_documento
+    union all
+    select 0,0,0,9, anio, curtime() from anios
+) tmp group by anio #SEPTIEMBRE
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,10 month, year(fecha_documento) anio,fecha_documento from gastos where month(fecha_documento) = 10 and anulado = 0
+    group by fecha_documento
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,10 month, year(fecha_documento) anio,fecha_documento from ventas where month(fecha_documento) = 10 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,10 month, year(fecha_documento) anio,fecha_documento from produccion where month(fecha_documento) = 10 and anulado = 0
+        group by fecha_documento
+    union all
+    select 0,0,0,10, anio, curtime() from anios
+) tmp group by anio #OCTUBRE
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,11 month, year(fecha_documento) anio,fecha_documento from gastos where month(fecha_documento) = 11 and anulado = 0
+    group by fecha_documento
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,11 month, year(fecha_documento) anio,fecha_documento from ventas where month(fecha_documento) = 11 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,11 month, year(fecha_documento) anio,fecha_documento from produccion where month(fecha_documento) = 11 and anulado = 0
+        group by fecha_documento
+    union all
+    select 0,0,0,11, anio, curtime() from anios
+) tmp group by anio #NOVIEMBRE
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,12 month, year(fecha_documento) anio,fecha_documento from gastos where month(fecha_documento) = 12 and anulado = 0
+    group by fecha_documento
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,12 month, year(fecha_documento) anio,fecha_documento from ventas where month(fecha_documento) = 12 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,12 month, year(fecha_documento) anio,fecha_documento from produccion where month(fecha_documento) = 12 and anulado = 0
+        group by fecha_documento
+    union all
+    select 0,0,0,12, anio, curtime() from anios
+) tmp group by anio #DICIEMBRE
 
 alter view vw_gastos_produccion as
-select exist,sum(gastos) gastos, sum(produccion) produccion, month, anio, nombre_lote,dualidad_mes from(
-	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,1 month, year(fecha_documento) anio,
+select exist,sum(gastos) gastos, sum(produccion) produccion, sum(p_local) p_local, sum(p_exportacion) p_exportacion, month, anio, nombre_lote,dualidad_mes from(
+	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,0 p_local,0 p_exportacion,1 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
         (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote  from gastos where month(fecha_documento) = 1 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 		group by sector_lote_id
 	union all 
-	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion,1 month, year(fecha_documento) anio,
+	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion
+        ,If(detalle_produccion.producto_id = 7,ifnull(sum(cajas),0), 0) p_local
+        ,If(detalle_produccion.producto_id = 8,ifnull(sum(cajas),0), 0) p_exportacion
+        ,1 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
-        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 1 and anulado = 0
+        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion 
+        left outer join detalle_produccion on detalle_produccion.produccion_id = produccion.id
+        where month(fecha_documento) = 1 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 	group by sector_lote_id
     union all
-		select count(id) exist,0 gastos, 0.00 produccion, 1 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'ene_feb'
+		select count(id) exist,0 gastos, 0.00 produccion,0,0, 1 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'ene_feb'
+        and vigencia = 1
 		group by descripcion
 ) tmp #ENERO 
 group by nombre_lote
 union all
-select exist,sum(gastos) gastos, sum(produccion) produccion, month, anio, nombre_lote,dualidad_mes from(
-	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,2 month, year(fecha_documento) anio,
+select exist,sum(gastos) gastos, sum(produccion) produccion, sum(p_local) p_local, sum(p_exportacion) p_exportacion, month, anio, nombre_lote,dualidad_mes from(
+	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,0 p_local,0 p_exportacion,2 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
         (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote  from gastos where month(fecha_documento) = 2 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 		group by sector_lote_id
 	union all 
-	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion,2 month, year(fecha_documento) anio,
+	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion
+        ,If(detalle_produccion.producto_id = 7,ifnull(sum(cajas),0), 0) p_local
+        ,If(detalle_produccion.producto_id = 8,ifnull(sum(cajas),0), 0) p_exportacion
+        ,2 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
-        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 2 and anulado = 0
+        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion 
+        left outer join detalle_produccion on detalle_produccion.produccion_id = produccion.id
+        where month(fecha_documento) = 2 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 	group by sector_lote_id
     union all
-		select count(id) exist,0 gastos, 0.00 produccion, 2 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'ene_feb'
+		select count(id) exist,0 gastos, 0.00 produccion,0,0, 2 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'ene_feb'
+        and vigencia = 1
 		group by descripcion
 ) tmp #FEBRERO
 group by nombre_lote
 union all
-select exist,sum(gastos) gastos, sum(produccion) produccion, month, anio, nombre_lote,dualidad_mes from(
-	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,3 month, year(fecha_documento) anio,
+select exist,sum(gastos) gastos, sum(produccion) produccion, sum(p_local) p_local, sum(p_exportacion) p_exportacion, month, anio, nombre_lote,dualidad_mes from(
+	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,0 p_local,0 p_exportacion,3 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
         (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote  from gastos where month(fecha_documento) = 3 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 		group by sector_lote_id
 	union all 
-	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion,3 month, year(fecha_documento) anio,
+	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion
+        ,If(detalle_produccion.producto_id = 7,ifnull(sum(cajas),0), 0) p_local
+        ,If(detalle_produccion.producto_id = 8,ifnull(sum(cajas),0), 0) p_exportacion
+        ,3 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
-        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 3 and anulado = 0
+        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion 
+        left outer join detalle_produccion on detalle_produccion.produccion_id = produccion.id
+        where month(fecha_documento) = 3 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 	group by sector_lote_id
     union all
-		select count(id) exist,0 gastos, 0.00 produccion, 3 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'mar_abr'
+		select count(id) exist,0 gastos, 0.00 produccion,0,0, 3 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'mar_abr'
+        and vigencia = 1
 		group by descripcion
 ) tmp #MARZO
 group by nombre_lote
 union all
-select exist,sum(gastos) gastos, sum(produccion) produccion, month, anio, nombre_lote,dualidad_mes from(
-	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,4 month, year(fecha_documento) anio,
+select exist,sum(gastos) gastos, sum(produccion) produccion, sum(p_local) p_local, sum(p_exportacion) p_exportacion, month, anio, nombre_lote,dualidad_mes from(
+	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,0 p_local,0 p_exportacion,4 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
         (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote  from gastos where month(fecha_documento) = 4 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 		group by sector_lote_id
 	union all 
-	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion,4 month, year(fecha_documento) anio,
+	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion
+        ,If(detalle_produccion.producto_id = 7,ifnull(sum(cajas),0), 0) p_local
+        ,If(detalle_produccion.producto_id = 8,ifnull(sum(cajas),0), 0) p_exportacion
+        ,4 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
-        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 4 and anulado = 0
+        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion 
+        left outer join detalle_produccion on detalle_produccion.produccion_id = produccion.id
+        where month(fecha_documento) = 4 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 	group by sector_lote_id
     union all
-		select count(id) exist,0 gastos, 0.00 produccion, 4 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'mar_abr'
+		select count(id) exist,0 gastos, 0.00 produccion,0,0, 4 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'mar_abr'
+        and vigencia = 1
 		group by descripcion
 ) tmp #ABRIL
 group by nombre_lote
 union all
-select exist,sum(gastos) gastos, sum(produccion) produccion, month, anio, nombre_lote,dualidad_mes from(
-	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,5 month, year(fecha_documento) anio,
+select exist,sum(gastos) gastos, sum(produccion) produccion, sum(p_local) p_local, sum(p_exportacion) p_exportacion, month, anio, nombre_lote,dualidad_mes from(
+	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,0 p_local,0 p_exportacion,5 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
         (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote  from gastos where month(fecha_documento) = 5 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 		group by sector_lote_id
 	union all 
-	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion,5 month, year(fecha_documento) anio,
+	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion
+        ,If(detalle_produccion.producto_id = 7,ifnull(sum(cajas),0), 0) p_local
+        ,If(detalle_produccion.producto_id = 8,ifnull(sum(cajas),0), 0) p_exportacion
+        ,5 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
-        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 5 and anulado = 0
+        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion 
+        left outer join detalle_produccion on detalle_produccion.produccion_id = produccion.id
+        where month(fecha_documento) = 5 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 	group by sector_lote_id
     union all
-		select count(id) exist,0 gastos, 0.00 produccion, 5 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'may_jun'
+		select count(id) exist,0 gastos, 0.00 produccion,0,0, 5 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'may_jun'
+        and vigencia = 1
 		group by descripcion
 ) tmp #MAYO
 group by nombre_lote
 union all
-select exist,sum(gastos) gastos, sum(produccion) produccion, month, anio, nombre_lote,dualidad_mes from(
-	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,6 month, year(fecha_documento) anio,
+select exist,sum(gastos) gastos, sum(produccion) produccion, sum(p_local) p_local, sum(p_exportacion) p_exportacion, month, anio, nombre_lote,dualidad_mes from(
+	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,0 p_local,0 p_exportacion,6 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
         (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote  from gastos where month(fecha_documento) = 6 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 		group by sector_lote_id
 	union all 
-	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion,6 month, year(fecha_documento) anio,
+	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion
+        ,If(detalle_produccion.producto_id = 7,ifnull(sum(cajas),0), 0) p_local
+        ,If(detalle_produccion.producto_id = 8,ifnull(sum(cajas),0), 0) p_exportacion
+        ,6 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
-        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 6 and anulado = 0
+        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion 
+        left outer join detalle_produccion on detalle_produccion.produccion_id = produccion.id
+        where month(fecha_documento) = 6 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 	group by sector_lote_id
     union all
-		select count(id) exist,0 gastos, 0.00 produccion, 6 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'may_jun'
+		select count(id) exist,0 gastos, 0.00 produccion,0,0, 6 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'may_jun'
+        and vigencia = 1
 		group by descripcion
 ) tmp #JUNIO
 group by nombre_lote
 union all
-select exist,sum(gastos) gastos, sum(produccion) produccion, month, anio, nombre_lote,dualidad_mes from(
-	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,7 month, year(fecha_documento) anio,
+select exist,sum(gastos) gastos, sum(produccion) produccion, sum(p_local) p_local, sum(p_exportacion) p_exportacion, month, anio, nombre_lote,dualidad_mes from(
+	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,0 p_local,0 p_exportacion,7 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
         (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote  from gastos where month(fecha_documento) = 7 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 		group by sector_lote_id
 	union all 
-	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion,7 month, year(fecha_documento) anio,
+	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion
+        ,If(detalle_produccion.producto_id = 7,ifnull(sum(cajas),0), 0) p_local
+        ,If(detalle_produccion.producto_id = 8,ifnull(sum(cajas),0), 0) p_exportacion
+        ,7 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
-        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 7 and anulado = 0
+        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion 
+        left outer join detalle_produccion on detalle_produccion.produccion_id = produccion.id
+        where month(fecha_documento) = 7 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 	group by sector_lote_id
     union all
-		select count(id) exist,0 gastos, 0.00 produccion, 7 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'jul_ago'
+		select count(id) exist,0 gastos, 0.00 produccion,0,0, 7 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'jul_ago'
+        and vigencia = 1
 		group by descripcion
 ) tmp #JULIO
 group by nombre_lote
 union all
-select exist,sum(gastos) gastos, sum(produccion) produccion, month, anio, nombre_lote,dualidad_mes from(
-	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,8 month, year(fecha_documento) anio,
+select exist,sum(gastos) gastos, sum(produccion) produccion, sum(p_local) p_local, sum(p_exportacion) p_exportacion, month, anio, nombre_lote,dualidad_mes from(
+	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,0 p_local,0 p_exportacion,8 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
         (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote  from gastos where month(fecha_documento) = 8 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 		group by sector_lote_id
 	union all 
-	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion,8 month, year(fecha_documento) anio,
+	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion
+        ,If(detalle_produccion.producto_id = 7,ifnull(sum(cajas),0), 0) p_local
+        ,If(detalle_produccion.producto_id = 8,ifnull(sum(cajas),0), 0) p_exportacion
+        ,8 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
-        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 8 and anulado = 0
+        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion 
+        left outer join detalle_produccion on detalle_produccion.produccion_id = produccion.id
+        where month(fecha_documento) = 8 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 	group by sector_lote_id
     union all
-		select count(id) exist,0 gastos, 0.00 produccion, 8 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'jul_ago'
+		select count(id) exist,0 gastos, 0.00 produccion,0,0, 8 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'jul_ago'
+        and vigencia = 1
 		group by descripcion
 ) tmp #AGOSTO
 group by nombre_lote
 union all
-select exist,sum(gastos) gastos, sum(produccion) produccion, month, anio, nombre_lote,dualidad_mes from(
-	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,9 month, year(fecha_documento) anio,
+select exist,sum(gastos) gastos, sum(produccion) produccion, sum(p_local) p_local, sum(p_exportacion) p_exportacion, month, anio, nombre_lote,dualidad_mes from(
+	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,0 p_local,0 p_exportacion,9 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
         (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote  from gastos where month(fecha_documento) = 9 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 		group by sector_lote_id
 	union all 
-	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion,9 month, year(fecha_documento) anio,
+	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion
+        ,If(detalle_produccion.producto_id = 7,ifnull(sum(cajas),0), 0) p_local
+        ,If(detalle_produccion.producto_id = 8,ifnull(sum(cajas),0), 0) p_exportacion
+        ,9 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
-        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 9 and anulado = 0
+        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion 
+        left outer join detalle_produccion on detalle_produccion.produccion_id = produccion.id
+        where month(fecha_documento) = 9 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 	group by sector_lote_id
     union all
-		select count(id) exist,0 gastos, 0.00 produccion, 9 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'sep_oct'
+		select count(id) exist,0 gastos, 0.00 produccion,0,0, 9 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'sep_oct'
+        and vigencia = 1
 		group by descripcion
 ) tmp #SEPTIEMBRE
 group by nombre_lote
 union all
-select exist,sum(gastos) gastos, sum(produccion) produccion, month, anio, nombre_lote,dualidad_mes from(
-	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,10 month, year(fecha_documento) anio,
+select exist,sum(gastos) gastos, sum(produccion) produccion, sum(p_local) p_local, sum(p_exportacion) p_exportacion, month, anio, nombre_lote,dualidad_mes from(
+	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,0 p_local,0 p_exportacion,10 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
         (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote  from gastos where month(fecha_documento) = 10 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 		group by sector_lote_id
 	union all 
-	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion,10 month, year(fecha_documento) anio,
+	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion
+        ,If(detalle_produccion.producto_id = 7,ifnull(sum(cajas),0), 0) p_local
+        ,If(detalle_produccion.producto_id = 8,ifnull(sum(cajas),0), 0) p_exportacion
+        ,10 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
-        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 10 and anulado = 0
+        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion 
+        left outer join detalle_produccion on detalle_produccion.produccion_id = produccion.id
+        where month(fecha_documento) = 10 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 	group by sector_lote_id
     union all
-		select count(id) exist,0 gastos, 0.00 produccion, 10 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'sep_oct'
+		select count(id) exist,0 gastos, 0.00 produccion,0,0, 10 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'sep_oct'
+        and vigencia = 1
 		group by descripcion
 ) tmp #OCTUBRE
 group by nombre_lote
 union all
-select exist,sum(gastos) gastos, sum(produccion) produccion, month, anio, nombre_lote,dualidad_mes from(
-	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,11 month, year(fecha_documento) anio,
+select exist,sum(gastos) gastos, sum(produccion) produccion, sum(p_local) p_local, sum(p_exportacion) p_exportacion, month, anio, nombre_lote,dualidad_mes from(
+	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,0 p_local,0 p_exportacion,11 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
         (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote  from gastos where month(fecha_documento) = 11 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 		group by sector_lote_id
 	union all 
-	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion,11 month, year(fecha_documento) anio,
+	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion
+        ,If(detalle_produccion.producto_id = 7,ifnull(sum(cajas),0), 0) p_local
+        ,If(detalle_produccion.producto_id = 8,ifnull(sum(cajas),0), 0) p_exportacion
+        ,11 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
-        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 11 and anulado = 0
+        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion 
+        left outer join detalle_produccion on detalle_produccion.produccion_id = produccion.id
+        where month(fecha_documento) = 11 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 	group by sector_lote_id
     union all
-		select count(id) exist,0 gastos, 0.00 produccion, 11 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'nov_dic'
+		select count(id) exist,0 gastos, 0.00 produccion,0,0, 11 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'nov_dic'
+        and vigencia = 1
 		group by descripcion
 ) tmp #NOVIEMBRE
 group by nombre_lote
 union all
-select exist,sum(gastos) gastos, sum(produccion) produccion, month, anio, nombre_lote,dualidad_mes from(
-	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,12 month, year(fecha_documento) anio,
+select exist,sum(gastos) gastos, sum(produccion) produccion, sum(p_local) p_local, sum(p_exportacion) p_exportacion, month, anio, nombre_lote,dualidad_mes from(
+	select 0 exist,ifnull(sum(total_gasto),0) as gastos, 0 produccion,0 p_local,0 p_exportacion,12 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
         (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote  from gastos where month(fecha_documento) = 12 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 		group by sector_lote_id
 	union all 
-	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion,12 month, year(fecha_documento) anio,
+	select 0 exist,0 gastos,ifnull(sum(total_produccion),0) as produccion
+        ,If(detalle_produccion.producto_id = 7,ifnull(sum(cajas),0), 0) p_local
+        ,If(detalle_produccion.producto_id = 8,ifnull(sum(cajas),0), 0) p_exportacion
+        ,12 month, year(fecha_documento) anio,
 		(select dualidad_mes from sector_lotes where id = sector_lote_id) dualidad_mes,
-        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 12 and anulado = 0
+        (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion 
+        left outer join detalle_produccion on detalle_produccion.produccion_id = produccion.id
+        where month(fecha_documento) = 12 and anulado = 0
+        and (select vigencia from sector_lotes where id = sector_lote_id) = 1
 	group by sector_lote_id
     union all
-		select count(id) exist,0 gastos, 0.00 produccion, 12 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'nov_dic'
+		select count(id) exist,0 gastos, 0.00 produccion,0,0, 12 month, year(curtime()) anio, dualidad_mes, descripcion from sector_lotes where dualidad_mes = 'nov_dic'
+        and vigencia = 1
 		group by descripcion
 ) tmp #DICIEMBRE
 group by nombre_lote
+
+
+#productos
+INSERT INTO productos (id,descripcion,tipo_inventario,tipo_producto,stock,costo,precio_unitario,unidad_medida,factor,tipo_gasto_id,created_at,updated_at)
+VALUES (1,'Urea','1',1,0.00,31.40,0.00,'kg',	50.00,5,curtime(),curtime());
+
+INSERT INTO productos (id,descripcion,tipo_inventario,tipo_producto,stock,costo,precio_unitario,unidad_medida,factor,tipo_gasto_id,created_at,updated_at)
+VALUES (2,'Fosfato diamónico','1','1',0.00,35.00,0.00,'kg',25.00,5,curtime(),curtime());
+
+INSERT INTO productos (id,descripcion,tipo_inventario,tipo_producto,stock,costo,precio_unitario,unidad_medida,factor,tipo_gasto_id,created_at,updated_at)
+VALUES (3,'Nitrato de potasio','1','1',0.00,70.00,0.00,'kg',0.00,5,curtime(),curtime());
+
+INSERT INTO productos (id,descripcion,tipo_inventario,tipo_producto,stock,costo,precio_unitario,unidad_medida,factor,tipo_gasto_id,created_at,updated_at)
+VALUES (4,'Sulfato armónico','1','1',0.00,32.16,0.00,'kg',0.00,5,curtime(),curtime());
+
+INSERT INTO productos (id,descripcion,tipo_inventario,tipo_producto,stock,costo,precio_unitario,unidad_medida,factor,tipo_gasto_id,created_at,updated_at)
+VALUES (5,'Riego (cada 2 días)','2','1',0.00,190.00,0.00,'und',1.00,6,curtime(),curtime());
+
+INSERT INTO productos (id,descripcion,tipo_inventario,tipo_producto,stock,costo,precio_unitario,unidad_medida,factor,tipo_gasto_id,created_at,updated_at)
+VALUES (6,'Vigilancia','2','1',0.00,350.00,0.00,'und',1.00,7,curtime(),curtime());
+
+INSERT INTO productos (id,descripcion,tipo_inventario,tipo_producto,stock,costo,precio_unitario,unidad_medida,factor,tipo_gasto_id,created_at,updated_at)
+VALUES (7,'Papaya Local','1','2',00.00,0.00,5.00,'lb',37.00,8,curtime(),curtime());
+
+INSERT INTO productos (id,descripcion,tipo_inventario,tipo_producto,stock,costo,precio_unitario,unidad_medida,factor,tipo_gasto_id,created_at,updated_at)
+VALUES (8,'Papaya Exportación','1','2',0.00,0.00,5.00,'lb',37.00,8,curtime(),curtime());
+
+INSERT INTO productos (id,descripcion,tipo_inventario,tipo_producto,stock,costo,precio_unitario,unidad_medida,factor,tipo_gasto_id,created_at,updated_at)
+VALUES (9,'Jornalero','2','1',0.00,195.00,0.00,'und',1.00,9,curtime(),curtime());
+
+#tipos_gastos;
+INSERT INTO tipos_gastos (id,descripcion,created_at,updated_at)
+VALUES(5,'Fertilizantes',curtime(),curtime());
+
+INSERT INTO tipos_gastos (id,descripcion,created_at,updated_at)
+VALUES(6,'Riego',curtime(),curtime());
+
+INSERT INTO tipos_gastos (id,descripcion,created_at,updated_at)
+VALUES(7,'Vigilancia',curtime(),curtime());
+
+INSERT INTO tipos_gastos (id,descripcion,created_at,updated_at)
+VALUES(8,'Indeterminado',curtime(),curtime());
+
+INSERT INTO tipos_gastos (id,descripcion,created_at,updated_at)
+VALUES(9,'mano de obra',curtime(),curtime());
+
+select * from sector_lotes;
+#sector_lotes
+	#sector
+	INSERT INTO sector_lotes (id,descripcion,data,codigo_padre,hectareas_area,dualidad_mes,vigencia,created_at,updated_at)
+	VALUES (5,'Parcela Paya Maradol2022','SC',null,20.00,null,0,curtime(),curtime());
+	#hectarea
+	INSERT INTO sector_lotes (id,descripcion,data,codigo_padre,hectareas_area,dualidad_mes,vigencia,created_at,updated_at)
+	VALUES (6,'Hectarea Enero-Febrero','LT',5,2,'ene_feb',1,curtime(),curtime());
+    INSERT INTO sector_lotes (id,descripcion,data,codigo_padre,hectareas_area,dualidad_mes,vigencia,created_at,updated_at)
+	VALUES (7,'Hectarea Marzo-Abril','LT',5,2,'mar_abr',1,curtime(),curtime());
+    INSERT INTO sector_lotes (id,descripcion,data,codigo_padre,hectareas_area,dualidad_mes,vigencia,created_at,updated_at)
+	VALUES (8,'Hectarea Mayo-Junio','LT',5,2,'may_jun',1,curtime(),curtime());
+    INSERT INTO sector_lotes (id,descripcion,data,codigo_padre,hectareas_area,dualidad_mes,vigencia,created_at,updated_at)
+	VALUES (9,'Hectarea Julio-Agosto','LT',5,2,'jul_ago',1,curtime(),curtime());
+    INSERT INTO sector_lotes (id,descripcion,data,codigo_padre,hectareas_area,dualidad_mes,vigencia,created_at,updated_at)
+	VALUES (10,'Hectarea Septiembre-Octubre','LT',5,2,'sep_oct',1,curtime(),curtime());
+    INSERT INTO sector_lotes (id,descripcion,data,codigo_padre,hectareas_area,dualidad_mes,vigencia,created_at,updated_at)
+	VALUES (11,'Hectarea Noviembre-Diciembre','LT',5,2,'nov_dic',1,curtime(),curtime());
+    
+#cliente
+INSERT INTO clientes (id,cedula,nombres,apellidos,email,direccion,telefono,celular,tipo_cliente,created_at,updated_at)
+VALUES (1,'0921571857','Joel Javier','García Zavala','mascasacada56@gmail.com','Avenida del ejercito y Maracai','2358006','0986481355','1',curtime(),curtime());
+
+INSERT INTO clientes (id,cedula,nombres,apellidos,email,direccion,telefono,celular,tipo_cliente,created_at,updated_at)
+VALUES (2,'0945682136','Miguel Pedro','Contreras Viñeda','pedcontre@gmail.com','avanieda7788','2698456','0965891255','2',curtime(),curtime());
+
+INSERT INTO clientes (id,cedula,nombres,apellidos,email,direccion,telefono,celular,tipo_cliente,created_at,updated_at)
+VALUES (3,'0701794588','Angela Azusena','Suarez','angesua@gmail.com','Avenida del ejercito y Maracai','2357452','0967221155','2',curtime(),curtime());
+
+
+
+

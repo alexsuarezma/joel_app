@@ -13,7 +13,7 @@
             @error('sector_lote_id') <span class="error">{{ $message }}</span> @enderror
         </div>
         <div class="form-group col-md-6">
-            <label for="exampleInputSectorLote">Meses</label>
+            <label for="exampleInputSectorLote">Mes</label>
             <input type="text" class="form-control form-control-sidebar" id="exampleInputSectorLote" placeholder="Sector / Hectarea (Mes)" wire:model="sector_lote_mes" readonly>
         </div>
     </div>
