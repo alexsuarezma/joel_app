@@ -45,6 +45,12 @@
                             <input type="text" name="comentario" value="{{ $venta->tipo_venta == 1 ? 'Local' : 'Exterior' }}" class="form-control" id="exampleInputComentario1" required readonly>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputSH">Sector / Hectarea </label>
+                            <input type="text" name="comentario" value="{{ $venta->sectorLote->descripcion }}" class="form-control" id="exampleInputComentario1" required readonly>
+                        </div>
+                    </div>
                     <div class="d-flex justify-content-between">
                         <label class="font-weight-bold mt-3">Detalle</label>
                     </div>

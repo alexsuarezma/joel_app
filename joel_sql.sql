@@ -715,4 +715,197 @@ VALUES (3,'0701794588','Angela Azusena','Suarez','angesua@gmail.com','Avenida de
 
 
 
+alter view vw_balance_final as
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio, nombre_lote from(   
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,1 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from gastos where month(fecha_documento) = 1 and anulado = 0
+    group by fecha_documento,sector_lote_id
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,1 month, year(fecha_documento) anio,fecha_documento, 
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from ventas where month(fecha_documento) = 1 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,1 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 1 and anulado = 0
+        group by fecha_documento,sector_lote_id
+    union all
+    select 0,0,0,1, anio, curtime(), '' from anios
+) tmp  group by anio #ENERO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio, nombre_lote from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,2 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from gastos where month(fecha_documento) = 2 and anulado = 0
+    group by fecha_documento,sector_lote_id
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,2 month, year(fecha_documento) anio,fecha_documento, 
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from ventas where month(fecha_documento) = 2 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,2 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 2 and anulado = 0
+        group by fecha_documento,sector_lote_id
+    union all
+    select 0,0,0,2, anio, curtime(), '' from anios
+) tmp group by anio #FEBRERO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio, nombre_lote from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,3 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from gastos where month(fecha_documento) = 3 and anulado = 0
+    group by fecha_documento,sector_lote_id
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,3 month, year(fecha_documento) anio,fecha_documento, 
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from ventas where month(fecha_documento) = 3 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,3 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 3 and anulado = 0
+        group by fecha_documento,sector_lote_id
+    union all
+    select 0,0,0,3, anio, curtime(), '' from anios
+) tmp group by anio #MARZO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio, nombre_lote from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,4 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from gastos where month(fecha_documento) = 4 and anulado = 0
+    group by fecha_documento,sector_lote_id
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,4 month, year(fecha_documento) anio,fecha_documento, 
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from ventas where month(fecha_documento) = 4 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,4 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 4 and anulado = 0
+        group by fecha_documento,sector_lote_id
+    union all
+    select 0,0,0,4, anio, curtime(), '' from anios
+) tmp group by anio #ABRIL
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio, nombre_lote from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,5 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from gastos where month(fecha_documento) = 5 and anulado = 0
+    group by fecha_documento,sector_lote_id
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,5 month, year(fecha_documento) anio,fecha_documento, 
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from ventas where month(fecha_documento) = 5 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,5 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 5 and anulado = 0
+        group by fecha_documento,sector_lote_id
+    union all
+    select 0,0,0,5, anio, curtime(), '' from anios
+) tmp group by anio #MAYO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio, nombre_lote from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,6 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from gastos where month(fecha_documento) = 6 and anulado = 0
+    group by fecha_documento,sector_lote_id
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,6 month, year(fecha_documento) anio,fecha_documento, 
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from ventas where month(fecha_documento) = 6 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,6 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 6 and anulado = 0
+        group by fecha_documento,sector_lote_id
+    union all
+    select 0,0,0,6, anio, curtime(), '' from anios
+) tmp group by anio #JUNIO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio, nombre_lote from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,7 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from gastos where month(fecha_documento) = 7 and anulado = 0
+    group by fecha_documento,sector_lote_id
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,7 month, year(fecha_documento) anio,fecha_documento, 
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from ventas where month(fecha_documento) = 7 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,7 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 7 and anulado = 0
+        group by fecha_documento,sector_lote_id
+    union all
+    select 0,0,0,7, anio, curtime(), '' from anios
+) tmp group by anio #JULIO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio, nombre_lote from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,8 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from gastos where month(fecha_documento) = 8 and anulado = 0
+    group by fecha_documento,sector_lote_id
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,8 month, year(fecha_documento) anio,fecha_documento, 
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from ventas where month(fecha_documento) = 8 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,8 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 8 and anulado = 0
+        group by fecha_documento,sector_lote_id
+    union all
+    select 0,0,0,8, anio, curtime(), '' from anios
+) tmp group by anio #AGOSTO
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio, nombre_lote from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,9 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from gastos where month(fecha_documento) = 9 and anulado = 0
+    group by fecha_documento,sector_lote_id
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,9 month, year(fecha_documento) anio,fecha_documento, 
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from ventas where month(fecha_documento) = 9 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,9 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 9 and anulado = 0
+        group by fecha_documento,sector_lote_id
+    union all
+    select 0,0,0,9, anio, curtime(), '' from anios
+) tmp group by anio #SEPTIEMBRE
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio, nombre_lote from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,10 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from gastos where month(fecha_documento) = 10 and anulado = 0
+    group by fecha_documento,sector_lote_id
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,10 month, year(fecha_documento) anio,fecha_documento, 
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from ventas where month(fecha_documento) = 10 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,10 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 10 and anulado = 0
+        group by fecha_documento,sector_lote_id
+    union all
+    select 0,0,0,10, anio, curtime(), '' from anios
+) tmp group by anio #OCTUBRE
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio, nombre_lote from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,11 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from gastos where month(fecha_documento) = 11 and anulado = 0
+    group by fecha_documento,sector_lote_id
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,11 month, year(fecha_documento) anio,fecha_documento, 
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from ventas where month(fecha_documento) = 11 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,11 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 11 and anulado = 0
+        group by fecha_documento,sector_lote_id
+    union all
+    select 0,0,0,11, anio, curtime(), '' from anios
+) tmp group by anio #NOVIEMBRE
+union all
+select sum(gastos) gastos, sum(ventas) ventas, sum(produccion) produccion, month, fecha_documento, anio, nombre_lote from(
+    select ifnull(sum(total_gasto),0) as gastos, 0 ventas, 0 produccion,12 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from gastos where month(fecha_documento) = 12 and anulado = 0
+    group by fecha_documento,sector_lote_id
+    union all 
+    select 0 gastos,ifnull(sum(total_venta),0) as ventas, 0 produccion,12 month, year(fecha_documento) anio,fecha_documento, 
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from ventas where month(fecha_documento) = 12 and anulado = 0
+    group by fecha_documento
+    union all
+    select 0 gastos, 0 ventas,ifnull(sum(total_produccion),0) as produccion,12 month, year(fecha_documento) anio,fecha_documento,
+    (select descripcion from sector_lotes where id = sector_lote_id) nombre_lote from produccion where month(fecha_documento) = 12 and anulado = 0
+        group by fecha_documento,sector_lote_id
+    union all
+    select 0,0,0,12, anio, curtime(), '' from anios
+) tmp group by anio #DICIEMBRE
+
 

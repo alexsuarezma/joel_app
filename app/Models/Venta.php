@@ -27,4 +27,9 @@ class Venta extends Model
     public function usuarioAnula(){
         return $this->belongsTo('App\Models\User', 'user_anula_id');
     }
+
+    public function sectorLote()
+    {
+        return $this->belongsTo('App\Models\SectorLote', 'sector_lote_id');
+    }
 }

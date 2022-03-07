@@ -19,6 +19,7 @@ class VentaController extends Controller
             'comentario' => 'string|max:100',
             'fecha_documento' => 'required|date',
             'cliente_id' => 'required|numeric',
+            'sector_lote_id' => 'required|numeric',
             'tipo_venta' => 'required|string|max:100',
             // 'total_venta' => 'required|numeric',
             'producto_id' => 'required|array|min:1',
@@ -57,6 +58,7 @@ class VentaController extends Controller
             $venta->cliente_id = $request->input('cliente_id');
             $venta->tipo_venta = $request->input('tipo_venta');
             $venta->comentario = $request->input('comentario');
+            $venta->sector_lote_id = $request->input('sector_lote_id');
             $venta->fecha_documento = date("Y/m/d", strtotime($request->input('fecha_documento')));
             $venta->user_registro_id = \Auth::user()->id;
 

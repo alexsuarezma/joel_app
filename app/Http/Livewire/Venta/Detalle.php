@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Venta;
 
 use App\Models\Producto;
 use App\Models\Cliente;
+use App\Models\SectorLote;
 
 use Livewire\Component;
 
@@ -21,6 +22,9 @@ class Detalle extends Component
     
     public $detalles_ventas = array();
     
+    public $sector_lote_id;
+    public $sector_lote_mes;
+    public $descripcion_lote;
     public $producto_id;
     public $cliente_id;
     public $descripcion;
@@ -59,6 +63,11 @@ class Detalle extends Component
             'clientes' => Cliente::where('nombres', 'LIKE', "%{$this->search}%")->orWhere('apellidos', 'LIKE', "%{$this->search}%")->
                                         orWhere('cedula', 'LIKE', "%{$this->search}%")
                             ->paginate(10),
+            'sector_lotes' => SectorLote::where( function($query) {
+                                $query->where('descripcion', 'LIKE', "%{$this->search}%")->orWhere('hectareas_area', 'LIKE', "%{$this->search}%");
+                            })
+                            ->where('data', 'LT')
+                            ->paginate(10),
         ]);
     }
 
@@ -68,6 +77,8 @@ class Detalle extends Component
         //$this->cliente_id = '';
         $this->descripcion = '';
         $this->descripcion_cliente = '';
+        $this->descripcion_lote = '';
+        $this->sector_lote_mes = '';
         $this->cantidad = 0;
         $this->precio_unitario = 0;
         $this->cajas = 0;
@@ -161,6 +172,14 @@ class Detalle extends Component
         $this->total = $this->cajas * $this->precio_unitario;
         $this->stock_actual = $producto->stock;
 
+        $this->emit('hideModal');
+    }
+
+    public function selectedSectorLote(SectorLote $sector_lote){
+        
+        $this->sector_lote_id = $sector_lote->id;
+        $this->descripcion_lote = $sector_lote->descripcion;
+        $this->sector_lote_mes = $sector_lote->dualidad_mes;
         $this->emit('hideModal');
     }
 

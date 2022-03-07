@@ -20,6 +20,24 @@
             </select>
         </div>
     </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="exampleInputSectorLote">Sector / Hectarea {{ $sector_lote_id != '' ? '['.$descripcion_lote.']' : '' }}</label>
+            <div class="input-group">
+                <input type="text" name="sector_lote_id" class="form-control form-control-sidebar" id="exampleInputSectorLote" placeholder="Sector / Hectarea" wire:model="sector_lote_id" readonly>
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-sidebar"  data-toggle="modal" data-target="#modal-selected-sector-lote">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+            @error('sector_lote_id') <span class="error">{{ $message }}</span> @enderror
+        </div>
+        <div class="form-group col-md-6">
+            <label for="exampleInputSectorLote">Mes</label>
+            <input type="text" class="form-control form-control-sidebar" id="exampleInputSectorLote" placeholder="Sector / Hectarea (Mes)" wire:model="sector_lote_mes" readonly>
+        </div>
+    </div>
     <div class="d-flex justify-content-between">
         <label class="font-weight-bold mt-3">Detalle</label>
     </div>
@@ -281,11 +299,62 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
+    <div wire:ignore.self class="modal fade" id="modal-selected-sector-lote" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Selección Sector / Hectarea</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+               
+                <div class="modal-body">
+                    <div class="callout callout-info">
+                        <h5>Selección Sector / Hectarea</h5>
+                    </div>
+                    <p>Sector / Hectareas</p>
+                    <div class="col-md-12">
+                        <div class="input-group" data-widget="sidebar-search">
+                            <input class="form-control form-control-sidebar" type="search" placeholder="Search" wire:model="search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-sidebar">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0" style="padding-top:40px; height: 200px;">
+                        <table class="table table-head-fixed text-nowrap">
+                            <tbody>
+                                @forelse($sector_lotes as $sector_lote)
+                                    <tr style="cursor:pointer;" wire:click.prevent="selectedSectorLote({{$sector_lote}})" data-bs-dismiss="modal">
+                                        <td>{{$sector_lote->id}}</td>
+                                        <td>{{$sector_lote->descripcion}}</td>
+                                        <td>{{$sector_lote->dualidad_mes}}</td>
+                                    </tr>
+                                @empty
+                                    <div class="d-flex align-items-center justify-content-center pt-3">
+                                        <span class="text-gray-400 text-sm">No existen coincidencias asociadas a su busqueda.</span>
+                                    </div>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
     <script>
         window.livewire.on('hideModal', () => {
             $('#modal-selected-product').modal('hide') 
             $('#modal-selected-cliente').modal('hide') 
+            $('#modal-selected-sector-lote').modal('hide') 
         })
     </script>
 </div>
